@@ -13,5 +13,10 @@ Repositório dedicado ao projeto
   * A fazendo: Compartilhando links úteis para preparação de projeto
   * A fazer: Criar cronograma e definir atividades básicas
 
+- Heitor Campanhol da Silva
+  * Feito:   Participei da reunião
+  * A fazendo: Configurando repositório conjunto do GitHub
+  * A fazer: Baixar e configurar ambiente de desenvolvimento (Android Studio)
+
 ### Dia 20/08/2023 Atualização Luis Felipe Barbosa
  * Android Studio Instalado 
