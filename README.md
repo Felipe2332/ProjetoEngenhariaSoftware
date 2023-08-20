@@ -14,4 +14,4 @@ Repositório dedicado ao projeto
   * A fazer: Criar cronograma e definir atividades básicas
 
 ### Dia 20/08/2023 Atualização Luis Felipe Barbosa
-  . Android Studio Instalado 
+ * Android Studio Instalado 
