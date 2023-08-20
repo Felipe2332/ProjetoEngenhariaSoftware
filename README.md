@@ -11,4 +11,7 @@ Repositório dedicado ao projeto
 - André Simão de Souza
   * Feito: Participei da reunião, onde foi explicado o projeto, definidas diretrizes iniciais e funções de integrantes
   * A fazendo: Compartilhando links úteis para preparação de projeto
-  * A fazer: Criar cronograma e definir atividades básicas  
+  * A fazer: Criar cronograma e definir atividades básicas
+
+### Dia 20/08/2023 Atualização Luis Felipe Barbosa
+ - Android Studio Instalado 
