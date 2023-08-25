@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/buttonConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="225dp"
+        android:text="Connect to ESP32" />
+
+    <Button
+        android:id="@+id/buttonLedOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonConnect"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Turn LED ON"
+        android:enabled="false" />
+
+    <Button
+        android:id="@+id/buttonLedOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLedOn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Turn LED OFF"
+        android:enabled="false" />
+
+</RelativeLayout>
