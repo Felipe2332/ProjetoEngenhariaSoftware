@@ -1,74 +1,202 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Pressable } from 'react-native';
-import { BleManager } from 'react-native-ble-plx';
-import { useNavigation } from '@react-navigation/native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import { TouchableOpacity } from 'react-native';
-
-import styles from '../styles/styles';
-import { Link } from 'expo-router';
-import telaPreset from './telaPreset';
-
 import "expo-router/entry";
 
-const index = () => {
-  const [macAddress, setMacAddress] = useState('');
-  const [error, setError] = useState(null);
 
-  const handleConnect = async () => {
-    console.log(`Conectando à placa com endereço MAC: ${macAddress}`);
-    const bleManager = new BleManager();
+import React, {useState, useEffect} from 'react';
+import {
+  Text,
+  Alert,
+  View,
+  FlatList,
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  NativeModules,
+  useColorScheme,
+  TouchableOpacity,
+  NativeEventEmitter,
+  PermissionsAndroid,
+  ImageBackground,
+} from 'react-native';
+import BleManager from 'react-native-ble-manager';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import DeviceList from '../DeviceList'
+import {styles} from '../styles/styles'
 
-    
+const BleManagerModule = NativeModules.BleManager;
+const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-    try { 
-      // Conecte-se ao dispositivo usando o endereço MAC
-      const device = await bleManager.connectToDevice(macAddress);
-  
-      // Descubra todos os serviços e características disponíveis
-      const services = await device.discoverAllServicesAndCharacteristics();
-  
-      // Aqui você pode interagir com os serviços e características do dispositivo
-      // Por exemplo, você pode ler ou escrever dados em uma característica específica
-    } catch (error) {
-      
-      console.log(`Erro ao conectar ao dispositivo: ${error}`);
-      setError('Endereço MAC inválido. Por favor, tente novamente.');
-    };
-  
+const App = () => {
+  const peripherals = new Map();
+  const [isScanning, setIsScanning] = useState(false);
+  const [connectedDevices, setConnectedDevices] = useState([]);
+  const [discoveredDevices, setDiscoveredDevices] = useState([]);
+  const handleGetConnectedDevices = () => {
+    BleManager.getBondedPeripherals([]).then(results => {
+      for (let i = 0; i < results.length; i++) {
+        let peripheral = results[i];
+        peripheral.connected = true;
+        peripherals.set(peripheral.id, peripheral);
+        setConnectedDevices(Array.from(peripherals.values()));
+      }
+    });
   };
-
-
+  useEffect(() => {
+    BleManager.enableBluetooth().then(() => {
+      console.log('Bluetooth is turned on!');
+    });
+    BleManager.start({showAlert: false}).then(() => {
+      console.log('BleManager initialized');
+      handleGetConnectedDevices();
+    });
+    let stopDiscoverListener = BleManagerEmitter.addListener(
+      'BleManagerDiscoverPeripheral',
+      peripheral => {
+        peripherals.set(peripheral.id, peripheral);
+        setDiscoveredDevices(Array.from(peripherals.values()));
+      },
+    );
+    let stopConnectListener = BleManagerEmitter.addListener(
+      'BleManagerConnectPeripheral',
+      peripheral => {
+        console.log('BleManagerConnectPeripheral:', peripheral);
+      },
+    );
+    let stopScanListener = BleManagerEmitter.addListener(
+      'BleManagerStopScan',
+      () => {
+        setIsScanning(false);
+        console.log('scan stopped');
+      },
+    );
+    if (Platform.OS === 'android' && Platform.Version >= 23) {
+      PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then(result => {
+        if (result) {
+          console.log('Permission is OK');
+        } else {
+          PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          ).then(result => {
+            if (result) {
+              console.log('User accepted');
+            } else {
+              console.log('User refused');
+            }
+          });
+        }
+      });
+    }
+    return () => {
+      stopDiscoverListener.remove();
+      stopConnectListener.remove();
+      stopScanListener.remove();
+    };
+  }, []);
+  const startScan = () => {
+    if (!isScanning) {
+      BleManager.scan([], 5, true)
+        .then(() => {
+          console.log('Scanning...');
+          setIsScanning(true);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  };
+  // Deve-se parear previamente com o dispositivo antes de conectar
+  const connectToPeripheral = peripheral => {
+    BleManager.createBond(peripheral.id)
+      .then(() => {
+        peripheral.connected = true;
+        peripherals.set(peripheral.id, peripheral);
+        setConnectedDevices(Array.from(peripherals.values()));
+        setDiscoveredDevices(Array.from(peripherals.values()));
+        console.log('BLE device paired successfully');
+      })
+      .catch(() => {
+        console.log('failed to bond');
+      });
+  };
+  // disconnect from device
+  const disconnectFromPeripheral = peripheral => {
+    BleManager.removeBond(peripheral.id)
+      .then(() => {
+        peripheral.connected = false;
+        peripherals.set(peripheral.id, peripheral);
+        setConnectedDevices(Array.from(peripherals.values()));
+        setDiscoveredDevices(Array.from(peripherals.values()));
+        Alert.alert(`Disconnected from ${peripheral.name}`);
+      })
+      .catch(() => {
+        console.log('fail to remove the bond');
+      });
+  };
+  
+  // render list of bluetooth devices
   return (
-    <View style = {styles.container}>
-      
-      <Text style ={styles.text}>Insira o endereço MAC da placa:</Text>
-      <TextInput
-        value={macAddress}
-        onChangeText={setMacAddress}
-        placeholder="Digite seu Endereço"
-        style = {styles.input}
-        
-      />
-      <TouchableOpacity
-        style={styles.button} 
-        onPress={handleConnect}
-        >
-        <Text style={styles.buttonText}>Conectar</Text>
-      </TouchableOpacity>
-      {error && <Text>{error}</Text>}
-
-      <Link href="/telapreset" asChild>
-      <TouchableOpacity style={styles.button}>
-      <Text style={styles.buttonText}>Ir para tela preset</Text>
-      </TouchableOpacity>
-      </Link>
-
-    </View>
     
+    <SafeAreaView style={[styles.container]}>
+      <StatusBar backgroundColor={'black'}/>
+      
+      <View style={{paddingHorizontal: 20}}>
+        <Text
+          style={
+            styles.title}>
+          EsPEDAL
+        </Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.scanButton}
+          onPress={startScan}>
+          <Text style={styles.scanButtonText}>
+            {isScanning ? 'Scanning...' : 'Procure por dispositivos'}
+          </Text>
+        </TouchableOpacity>
+        <Text
+          style={
+            styles.subtitle}>
+          Dispositivos encontrados
+        </Text>
+        {discoveredDevices.length > 0 ? (
+          <FlatList
+            data={discoveredDevices}
+            renderItem={({item}) => (
+              <DeviceList
+                peripheral={item}
+                connect={connectToPeripheral}
+                disconnect={disconnectFromPeripheral}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+        ) : (
+          <Text style={styles.noDevicesText}>Não foram escontrados dispositivos</Text>
+        )}
+        <Text
+          style={
+            styles.subtitle 
+          }>
+          Dispositivos conectados:
+        </Text>
+        {connectedDevices.length > 0 ? (
+          <FlatList
+            data={connectedDevices}
+            renderItem={({item}) => (
+              <DeviceList
+                peripheral={item}
+                connect={connectToPeripheral}
+                disconnect={disconnectFromPeripheral}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+        ) : (
+          <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
-
-export default index;
+export default App;

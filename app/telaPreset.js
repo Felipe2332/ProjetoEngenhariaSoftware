@@ -8,7 +8,6 @@ export default function telaPreset () {
     return(
         <View>
             <Text>Bem vindo à tela de presets</Text>
-            <Button></Button>
         </View>
     )
 
