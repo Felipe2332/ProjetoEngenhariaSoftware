@@ -1,5 +1,6 @@
 import "expo-router/entry";
 
+import { useNavigation } from '@react-navigation/native';
 
 import React, {useState, useEffect} from 'react';
 import {
@@ -18,7 +19,6 @@ import {
   ImageBackground,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import DeviceList from '../DeviceList'
 import {styles} from '../styles/styles'
 
@@ -26,6 +26,7 @@ const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 const App = () => {
+  const navigation = useNavigation();
   const peripherals = new Map();
   const [isScanning, setIsScanning] = useState(false);
   const [connectedDevices, setConnectedDevices] = useState([]);
@@ -114,12 +115,15 @@ const App = () => {
         setConnectedDevices(Array.from(peripherals.values()));
         setDiscoveredDevices(Array.from(peripherals.values()));
         console.log('BLE device paired successfully');
+
+        // Após a conexão bem-sucedida, navegue para a tela de presets
+        navigation.navigate('telaPreset');
       })
       .catch(() => {
         console.log('failed to bond');
       });
   };
-  // disconnect from device
+  // Desconectar do dispositivo
   const disconnectFromPeripheral = peripheral => {
     BleManager.removeBond(peripheral.id)
       .then(() => {
@@ -133,12 +137,20 @@ const App = () => {
         console.log('fail to remove the bond');
       });
   };
+
+  const handlePress = () => {
+    
+    navigation.navigate('telaPreset');
+  };
   
-  // render list of bluetooth devices
+  
+  // Tela
   return (
     
     <SafeAreaView style={[styles.container]}>
       <StatusBar backgroundColor={'black'}/>
+      
+      <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>Ir pra proxima tela</Text></TouchableOpacity>
       
       <View style={{paddingHorizontal: 20}}>
         <Text
@@ -151,7 +163,7 @@ const App = () => {
           style={styles.scanButton}
           onPress={startScan}>
           <Text style={styles.scanButtonText}>
-            {isScanning ? 'Scanning...' : 'Procure por dispositivos'}
+            {isScanning ? 'Escaneando...' : 'Procure por dispositivos'}
           </Text>
         </TouchableOpacity>
         <Text
