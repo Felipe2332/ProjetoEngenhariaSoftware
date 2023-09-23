@@ -150,7 +150,7 @@ const App = () => {
     <SafeAreaView style={[styles.container]}>
       <StatusBar backgroundColor={'black'}/>
       
-      <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>Ir pra proxima tela</Text></TouchableOpacity>
+      <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>proxima tela</Text></TouchableOpacity>
       
       <View style={{paddingHorizontal: 20}}>
         <Text

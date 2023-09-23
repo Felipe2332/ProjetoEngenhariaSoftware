@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     justifyContent:"space-between",
     alignContent:"center",
     alignItems:"center",
-    maxHeight:"95%",
+    
   },
   presetButtonTop: {
     flex: 0.15,
@@ -56,8 +56,10 @@ export const styles = StyleSheet.create({
   },
   botaoVoltar:{
     position: 'absolute',
-    bottom: 0, 
-    left: 30, 
+    marginBottom:10,
+    marginTop:5,
+    padding:10,
+    left: 10,
     height:"6%",
     width:"20%",
     backgroundColor:"#801818",
@@ -67,7 +69,6 @@ export const styles = StyleSheet.create({
     textAlign:"center",
     alignItems:"center",
     
-    
   },
   textButtonVoltar:{
     fontSize:30,
@@ -76,6 +77,10 @@ export const styles = StyleSheet.create({
   image:{
     height:"100%",
     width:"100%",
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'space-between',
+    alignItems:'center',
   },
   scrollContainer: {
     padding: 16,
