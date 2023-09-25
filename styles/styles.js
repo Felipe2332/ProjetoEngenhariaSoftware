@@ -81,6 +81,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'space-between',
     alignItems:'center',
+    
   },
   scrollContainer: {
     padding: 16,

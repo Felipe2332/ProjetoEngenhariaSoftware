@@ -20,6 +20,7 @@ export default function telaPreset () {
           navigation.goBack();}} style={styles.botaoVoltar}>
             <Icon name="arrow-left"/>
           </TouchableOpacity>
+
         </View>
     )
 
