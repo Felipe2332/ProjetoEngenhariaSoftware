@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default function telaPreset () {
+export default function TelaPreset () {
 
     const navigation = useNavigation();
 
@@ -16,7 +16,7 @@ export default function telaPreset () {
 
           <StatusBar style="auto"/>
 
-            <ImageBackground source={require('../assets/imagemFundo.jpg')} style={styles.image}>
+            <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
             
 
             <TouchableOpacity onPress={() => {

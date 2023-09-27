@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: windowHeight,
-    paddingHorizontal: 10,
-    backgroundColor:'#777',
+    
+    
   },
   containerTelaPreset:{
     flex: 1,
@@ -48,11 +48,11 @@ export const styles = StyleSheet.create({
     textAlign:"center",
     alignItems:"center",
     width:"90%",
-    marginBottom:50
-    
+    marginBottom:50,
   },
   textButtonPreset:{
     fontSize:30,
+    fontFamily:"Inter-Black",
   },
   botaoVoltar:{
     position: 'absolute',
@@ -61,10 +61,10 @@ export const styles = StyleSheet.create({
     padding:10,
     left: 10,
     height:"6%",
-    width:"20%",
+    width:"10%",
     backgroundColor:"#801818",
-    borderTopEndRadius:20,
-    borderBottomLeftRadius:20,
+    borderRadius:25,
+    borderCurve:"circular",
     justifyContent:"center",
     textAlign:"center",
     alignItems:"center",
@@ -87,45 +87,57 @@ export const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
+    fontFamily:"Inter-Black",
     fontSize: 30,
+    color:"white",
     textAlign: 'center',
     marginBottom: 20,
     marginTop: 40,
   },
   subtitle: {
+    fontFamily:"Inter-Black",
+    color:"white",
     fontSize: 24,
     marginBottom: 10,
     marginTop: 20,
   },
   scanButton: {
+    fontFamily:"Inter-Black",
     backgroundColor: 'green',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
   },
   scanButtonText: {
+    fontFamily:"Inter-Black",
     color: 'white',
     textAlign: 'center',
   },
   noDevicesText: {
+    fontFamily:"Inter-Black",
     textAlign: 'center',
     marginTop: 10,
     fontStyle: 'italic',
+    color:"white",
   },
   deviceContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
+    color:"white",
   },
   deviceItem: {
     marginBottom: 10,
+    color:"white",
   },
   deviceName: {
     fontSize: 22,
     fontWeight: 'bold',
+    color:"white",
   },
   deviceInfo: {
     fontSize: 14,
+    color:"white",
   },
   deviceButton: {
     backgroundColor: 'green',

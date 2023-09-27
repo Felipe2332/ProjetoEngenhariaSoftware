@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default function telaPreset () {
+export default function PresetDois () {
 
     const navigation = useNavigation();
 

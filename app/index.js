@@ -1,7 +1,6 @@
 import "expo-router/entry";
 
 import { useNavigation } from '@react-navigation/native';
-
 import React, {useState, useEffect} from 'react';
 import {
   Text,
@@ -21,6 +20,7 @@ import {
 import BleManager from 'react-native-ble-manager';
 import DeviceList from '../DeviceList'
 import {styles} from '../styles/styles'
+
 
 const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -114,15 +114,22 @@ const App = () => {
         peripherals.set(peripheral.id, peripheral);
         setConnectedDevices(Array.from(peripherals.values()));
         setDiscoveredDevices(Array.from(peripherals.values()));
-        console.log('BLE device paired successfully');
-
-        // Após a conexão bem-sucedida, navegue para a tela de presets
+        console.log('BLE device paired successfully. ');
         navigation.navigate('telaPreset');
+        
+        // Chame retrieveServices dentro do bloco then de createBond
+        BleManager.retrieveServices(peripheral.id)
+          .then((peripheralInfo) => {
+            console.log('Informação do dispositivo:', peripheralInfo);
+            
+            // Após a conexão bem-sucedida, navegue para a tela de presets
+            
+          });
       })
       .catch(() => {
         console.log('failed to bond');
       });
-  };
+  }
   // Desconectar do dispositivo
   const disconnectFromPeripheral = peripheral => {
     BleManager.removeBond(peripheral.id)
@@ -147,12 +154,16 @@ const App = () => {
   // Tela
   return (
     
-    <SafeAreaView style={[styles.container]}>
-      <StatusBar backgroundColor={'black'}/>
+    
       
-      <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>proxima tela</Text></TouchableOpacity>
+    <SafeAreaView style={[styles.container]}>
+      <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
+    <StatusBar backgroundColor={'black'}/>
       
       <View style={{paddingHorizontal: 20}}>
+      
+      
+        <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>proxima tela</Text></TouchableOpacity>
         <Text
           style={
             styles.title}>
@@ -207,8 +218,11 @@ const App = () => {
         ) : (
           <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
         )}
+        
       </View>
+      </ImageBackground>
     </SafeAreaView>
+    
   );
 };
 export default App;
