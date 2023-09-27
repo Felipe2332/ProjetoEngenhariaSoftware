@@ -7,8 +7,13 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: windowHeight,
-    
-    
+    paddingHorizontal: 10,
+    backgroundColor:"black"
+  },
+  imageIndex:{
+    height:"100%",
+    width:"100%",
+    flex: 1,
   },
   containerTelaPreset:{
     flex: 1,
@@ -57,7 +62,7 @@ export const styles = StyleSheet.create({
   botaoVoltar:{
     position: 'absolute',
     marginBottom:10,
-    marginTop:5,
+    marginTop:10,
     padding:10,
     left: 10,
     height:"6%",
@@ -78,11 +83,11 @@ export const styles = StyleSheet.create({
     height:"100%",
     width:"100%",
     flex: 1,
-    resizeMode: 'cover',
     justifyContent: 'space-between',
     alignItems:'center',
     
   },
+  
   scrollContainer: {
     padding: 16,
   },
@@ -91,8 +96,11 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     color:"white",
     textAlign: 'center',
-    marginBottom: 20,
-    marginTop: 40,
+    marginTop:50,
+    marginRight:50,
+    marginLeft:50,
+    marginBottom:15,
+
   },
   subtitle: {
     fontFamily:"Inter-Black",
@@ -100,6 +108,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 10,
     marginTop: 20,
+    alignSelf:"center",
   },
   scanButton: {
     fontFamily:"Inter-Black",
@@ -124,7 +133,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-    color:"white",
   },
   deviceItem: {
     marginBottom: 10,

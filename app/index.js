@@ -20,13 +20,17 @@ import {
 import BleManager from 'react-native-ble-manager';
 import DeviceList from '../DeviceList'
 import {styles} from '../styles/styles'
-
+import { useFonts } from 'expo-font';
 
 const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 const App = () => {
+  const [fontsLoaded] = useFonts({
+    'Inter-Black': require('../assets/fonts/Inter-Black.otf'),
+  });
   const navigation = useNavigation();
+  
   const peripherals = new Map();
   const [isScanning, setIsScanning] = useState(false);
   const [connectedDevices, setConnectedDevices] = useState([]);
@@ -155,13 +159,12 @@ const App = () => {
   return (
     
     
-      
-    <SafeAreaView style={[styles.container]}>
-      <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
+    
+    <SafeAreaView style={styles.container}>
     <StatusBar backgroundColor={'black'}/>
-      
-      <View style={{paddingHorizontal: 20}}>
-      
+    <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.imageIndex}>
+    
+      <View>
       
         <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>proxima tela</Text></TouchableOpacity>
         <Text
@@ -219,9 +222,10 @@ const App = () => {
           <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
         )}
         
-      </View>
+        </View>
       </ImageBackground>
     </SafeAreaView>
+    
     
   );
 };
