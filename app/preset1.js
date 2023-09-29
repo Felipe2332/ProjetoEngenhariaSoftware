@@ -17,21 +17,44 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 export default function PresetUm () {
 
     const navigation = useNavigation();
-    let peripheralId = "B0:A7:32:15:39:40"
+    const [isLedOn, setIsLedOn] = useState(false);
 
-    BleManager.start({ showAlert: false }).then(() => {
-      // Success code
-      console.log("Modulo ta bao");
-    });
-    BleManager.retrieveServices(peripheralId).then(
-      (peripheralInfo) => {
+    const sendMessage = () => {
+      let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
+      let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
+      let characteristicUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID da característica
+      let data = isLedOn ? '0' : '1'; // comando que você deseja enviar
+      let bytes = stringToBytes(data); // Converte o comando em uma matriz de bytes
+      BleManager.start({ showAlert: false }).then(() => {
         // Success code
-        console.log("Peripheral info:", peripheralInfo);
-      }
-    );
-  
+        console.log("Modulo ta bao");
+      });
+      BleManager.scan([], 5, true).then(() => {
+        // Success code
+        console.log("Scan started");
+      });
+      BleManager.connect("B0:A7:32:15:39:42")
+  .then(() => {
+    // Success code
+    console.log("Connected");
+  })
+  .catch((error) => {
+    // Failure code
+    console.log(error);
+  });
+      BleManager.write(peripheralId, serviceUUID, characteristicUUID, bytes)
+      .then(() => {
+        // Sucesso ao escrever o comando
+        console.log('Comando enviado');
+        setIsLedOn(!isLedOn);
+      })
+        .catch((error) => {
+        // Falha ao escrever o comando
+        console.log(error);
+  });
+      
 
-    
+    }
    
 
     return(
@@ -46,7 +69,7 @@ export default function PresetUm () {
             <Icon name="arrow-left"/>
           </TouchableOpacity>
 
-          <TouchableOpacity ><Text style={{color:"white",alignItems:"center",justifyContent:"center",fontSize:35}}>Clique aqui para acender o led</Text></TouchableOpacity>
+          <TouchableOpacity onPress={sendMessage}><Text style={{color:"white",alignItems:"center",justifyContent:"center",fontSize:35}}>Clique aqui para acender o led</Text></TouchableOpacity>
           </ImageBackground>
         </View>
         
