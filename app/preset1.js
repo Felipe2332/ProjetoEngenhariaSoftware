@@ -58,7 +58,7 @@ export default function PresetUm () {
    
 
     return(
-        <View style={styles.containerTelaPreset}>
+        <View style={styles.containerTelaPresetUm}>
           <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
 
             <Text style={styles.title}>Tela de Preset 1</Text>
@@ -69,7 +69,7 @@ export default function PresetUm () {
             <Icon name="arrow-left"/>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={sendMessage}><Text style={{color:"white",alignItems:"center",justifyContent:"center",fontSize:35}}>Clique aqui para acender o led</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:250}}onPress={sendMessage}><Text style={{color:"white",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
           </ImageBackground>
         </View>
         

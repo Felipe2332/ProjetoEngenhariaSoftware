@@ -21,6 +21,7 @@ import BleManager from 'react-native-ble-manager';
 import DeviceList from '../DeviceList'
 import {styles} from '../styles/styles'
 import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -166,7 +167,6 @@ const App = () => {
     
       <View>
       
-        <TouchableOpacity onPress={handlePress}><Text style={styles.textButtonVoltar}>proxima tela</Text></TouchableOpacity>
         <Text
           style={
             styles.title}>
@@ -221,6 +221,7 @@ const App = () => {
         ) : (
           <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
         )}
+        <TouchableOpacity style={{backgroundColor:"blue",marginLeft:200,marginTop:150,alignItems:"center",borderRadius:15,}}onPress={handlePress}><Icon style={{fontSize:35}} name="arrow-right"></Icon></TouchableOpacity>
         
         </View>
       </ImageBackground>

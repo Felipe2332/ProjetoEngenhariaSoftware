@@ -23,6 +23,12 @@ export const styles = StyleSheet.create({
     alignItems:"center",
     
   },
+  containerTelaPresetUm:{
+    flex: 1,
+    justifyContent:"center",
+    alignItems:"center",
+    
+  },
   presetButtonTop: {
     flex: 0.15,
     backgroundColor: 'grey',
@@ -83,7 +89,7 @@ export const styles = StyleSheet.create({
     height:"100%",
     width:"100%",
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems:'center',
     
   },
