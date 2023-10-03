@@ -222,7 +222,6 @@ const App = () => {
           <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
         )}
         <TouchableOpacity style={{backgroundColor:"blue",marginLeft:200,marginTop:150,alignItems:"center",borderRadius:15,}}onPress={handlePress}><Icon style={{fontSize:35}} name="arrow-right"></Icon></TouchableOpacity>
-        
         </View>
       </ImageBackground>
     </SafeAreaView>
