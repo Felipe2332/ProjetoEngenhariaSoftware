@@ -18,13 +18,17 @@ export default function PresetUm () {
 
     const navigation = useNavigation();
     const [isLedOn, setIsLedOn] = useState(false);
+    const [isRedLedOn, setIsRedLedOn] = useState(false);
+    const [isYellowLedOn, setIsYellowLedOn] = useState(false);
+    const [isGreenLedOn, setIsGreenLedOn] = useState(false);// comando que você deseja enviar
 
-    const sendMessage = () => {
+    const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
       let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
       let characteristicUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID da característica
-      let data = isLedOn ? '0' : '1'; // comando que você deseja enviar
+      
       let bytes = stringToBytes(data); // Converte o comando em uma matriz de bytes
+
       BleManager.start({ showAlert: false }).then(() => {
         // Success code
         console.log("Modulo ta bao");
@@ -34,6 +38,8 @@ export default function PresetUm () {
         console.log("Scan started");
       });
       BleManager.connect("B0:A7:32:15:39:42")
+      
+      
   .then(() => {
     // Success code
     console.log("Connected");
@@ -42,6 +48,7 @@ export default function PresetUm () {
     // Failure code
     console.log(error);
   });
+  
       BleManager.write(peripheralId, serviceUUID, characteristicUUID, bytes)
       .then(() => {
         // Sucesso ao escrever o comando
@@ -51,10 +58,27 @@ export default function PresetUm () {
         .catch((error) => {
         // Falha ao escrever o comando
         console.log(error);
+        
   });
-      
+  
+}
+const toggleRedLed = () => {
+  let data = isRedLedOn ? '0' : '1'; 
+  sendMessage(data);
+  setIsRedLedOn(!isRedLedOn);
+};
+const toggleYellowLed = () => {
+  let data = isYellowLedOn ? '10' : '4'; 
+  sendMessage(data);
+  setIsYellowLedOn(!isYellowLedOn);
+};
+const toggleGreenLed = () => {
+  let data = isGreenLedOn ? '11' : '5'; 
+  sendMessage(data);
+  setIsGreenLedOn(!isGreenLedOn);
 
-    }
+};
+
    
 
     return(
@@ -69,7 +93,9 @@ export default function PresetUm () {
             <Icon name="arrow-left"/>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:250}}onPress={sendMessage}><Text style={{color:"white",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15}}onPress={toggleRedLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15}}onPress={toggleYellowLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15, marginBottom:50}}onPress={toggleGreenLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
           </ImageBackground>
         </View>
         
