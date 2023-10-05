@@ -57,13 +57,13 @@ class MyCallbacks : public BLECharacteristicCallbacks {
     } else if (value == "60") {
       digitalWrite(x6, LOW); // Desliga o LED conectado ao pino D21
      } else if (value == "71") {
-      digitalWrite(x7, HIGH); // Liga o LED conectado ao pino D23
+      digitalWrite(x7, HIGH); // Liga o LED conectado ao pino D22
     } else if (value == "70") {
-      digitalWrite(x7, LOW); // Desliga o LED conectado ao pino D23
+      digitalWrite(x7, LOW); // Desliga o LED conectado ao pino D22
      } else if (value == "81") {
-      digitalWrite(x8, HIGH); // Liga o LED conectado ao pino D24
+      digitalWrite(x8, HIGH); // Liga o LED conectado ao pino D23
     } else if (value == "80") {
-      digitalWrite(x8, LOW); // Desliga o LED conectado ao pino D24
+      digitalWrite(x8, LOW); // Desliga o LED conectado ao pino D23
     }
   }
 };
