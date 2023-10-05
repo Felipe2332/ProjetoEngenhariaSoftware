@@ -4,10 +4,10 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
-const int ledPin = 2;
+const int d2Pin = 2; // Porta D2
 const int d4Pin = 4; // Porta D4
-const int d5Pin = 5; //Porta D5
-bool ledStatus = false;
+const int d5Pin = 5; // Porta D5
+bool d2Status = false;
 bool d4Status = false;
 bool d5Status = false;
 
@@ -16,27 +16,27 @@ class MyCallbacks: public BLECharacteristicCallbacks {
       std::string value = pCharacteristic->getValue();
 
       if (value == "1") {
-        digitalWrite(ledPin, HIGH);
+        digitalWrite(d2Pin, HIGH); // Liga a porta D2
       } else if (value == "0") {
-        digitalWrite(ledPin, LOW);
+        digitalWrite(d2Pin, LOW); // Liga a porta D2
       } else if (value == "4") {
         digitalWrite(d4Pin, HIGH); // Liga a porta D4
       } else if (value == "10") {
         digitalWrite(d4Pin, LOW); // Desliga a porta D4
       }
       else if(value == "5") {
-        digitalWrite(d5Pin, HIGH); // Liga a porta D4
+        digitalWrite(d5Pin, HIGH); // Liga a porta D5
       } else if (value == "11") {
-        digitalWrite(d5Pin, LOW); // Desliga a porta D4
+        digitalWrite(d5Pin, LOW); // Desliga a porta D5
       }
     }
 };
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
+  pinMode(d2Pin, OUTPUT); // Configura a porta D2 como saída
   pinMode(d4Pin, OUTPUT); // Configura a porta D4 como saída
   pinMode(d5Pin, OUTPUT); // Configura a porta D5 como saída
-  digitalWrite(ledPin, LOW);
+  digitalWrite(d2Pin, LOW);
   digitalWrite(d4Pin, LOW);
   digitalWrite(d5Pin, LOW);
 
@@ -57,5 +57,5 @@ void setup() {
 }
 
 void loop() {
-  // Seu código aqui
+  // Permanece vazio
 }
