@@ -45,25 +45,25 @@ class MyCallbacks : public BLECharacteristicCallbacks {
     } else if (value == "30") {
       digitalWrite(x3, LOW); // Desliga o LED conectado ao pino D5
     } else if (value == "41") {
-      digitalWrite(x4, HIGH); // Liga o LED conectado ao pino D5
+      digitalWrite(x4, HIGH); // Liga o LED conectado ao pino D18
     } else if (value == "40") {
-      digitalWrite(x4, LOW); // Desliga o LED conectado ao pino D5
+      digitalWrite(x4, LOW); // Desliga o LED conectado ao pino D18
     } else if (value == "51") {
-      digitalWrite(x5, HIGH); // Liga o LED conectado ao pino D5
+      digitalWrite(x5, HIGH); // Liga o LED conectado ao pino D19
     } else if (value == "50") {
-      digitalWrite(x5, LOW); // Desliga o LED conectado ao pino D5
+      digitalWrite(x5, LOW); // Desliga o LED conectado ao pino D19
      } else if (value == "61") {
-      digitalWrite(x6, HIGH); // Liga o LED conectado ao pino D5
+      digitalWrite(x6, HIGH); // Liga o LED conectado ao pino D21
     } else if (value == "60") {
-      digitalWrite(x6, LOW); // Desliga o LED conectado ao pino D5
+      digitalWrite(x6, LOW); // Desliga o LED conectado ao pino D21
      } else if (value == "71") {
-      digitalWrite(x7, HIGH); // Liga o LED conectado ao pino D5
+      digitalWrite(x7, HIGH); // Liga o LED conectado ao pino D23
     } else if (value == "70") {
-      digitalWrite(x7, LOW); // Desliga o LED conectado ao pino D5
+      digitalWrite(x7, LOW); // Desliga o LED conectado ao pino D23
      } else if (value == "81") {
-      digitalWrite(x8, HIGH); 
+      digitalWrite(x8, HIGH); // Liga o LED conectado ao pino D24
     } else if (value == "80") {
-      digitalWrite(x8, LOW);
+      digitalWrite(x8, LOW); // Desliga o LED conectado ao pino D24
     }
   }
 };
