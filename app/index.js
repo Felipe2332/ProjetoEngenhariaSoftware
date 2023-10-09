@@ -163,15 +163,18 @@ const App = () => {
     
     <SafeAreaView style={styles.container}>
     <StatusBar backgroundColor={'black'}/>
-    <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.imageIndex}>
+    <ImageBackground source={require('../assets/Gray-background-iphone.jpg')} style={styles.imageIndex}>
     
       <View>
+      
+      <TouchableOpacity style={{backgroundColor:"darkgrey",marginLeft:200,marginTop:20,alignItems:"center",borderRadius:15, right: 0 }}onPress={handlePress}><Icon style={{fontSize:30}} name="arrow-right"></Icon></TouchableOpacity>
       
         <Text
           style={
             styles.title}>
           EsPEDAL
         </Text>
+        
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.scanButton}
@@ -221,7 +224,7 @@ const App = () => {
         ) : (
           <Text style={styles.noDevicesText}>Dispositivos desconectados</Text>
         )}
-        <TouchableOpacity style={{backgroundColor:"blue",marginLeft:200,marginTop:150,alignItems:"center",borderRadius:15,}}onPress={handlePress}><Icon style={{fontSize:35}} name="arrow-right"></Icon></TouchableOpacity>
+        
         </View>
       </ImageBackground>
     </SafeAreaView>

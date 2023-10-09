@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   presetButtonTop: {
     flex: 0.15,
-    backgroundColor: 'grey',
+    backgroundColor: 'darkred',
     borderWidth: 3,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   presetButtonMiddle: {
     flex: 0.15,
-    backgroundColor: 'beige',
+    backgroundColor: 'forestgreen',
     borderWidth: 3,
     justifyContent:"center",
     textAlign:"center",
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   presetButtonBottom: {
     flex: 0.15,
-    backgroundColor: 'pink',
+    backgroundColor: 'dodgerblue',
     borderWidth: 3,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
@@ -64,6 +64,8 @@ export const styles = StyleSheet.create({
   textButtonPreset:{
     fontSize:30,
     fontFamily:"Inter-Black",
+    
+    
   },
   botaoVoltar:{
     position: 'absolute',
@@ -118,14 +120,14 @@ export const styles = StyleSheet.create({
   },
   scanButton: {
     fontFamily:"Inter-Black",
-    backgroundColor: 'green',
+    backgroundColor: 'gold',
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
   },
   scanButtonText: {
     fontFamily:"Inter-Black",
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
   },
   noDevicesText: {
@@ -154,7 +156,7 @@ export const styles = StyleSheet.create({
     color:"white",
   },
   deviceButton: {
-    backgroundColor: 'green',
+    backgroundColor: 'gold',
     padding: 8,
     borderRadius: 5,
     marginBottom: 20,
