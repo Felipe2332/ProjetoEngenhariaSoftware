@@ -21,6 +21,7 @@ export default function PresetUm () {
     const [isRedLedOn, setIsRedLedOn] = useState(false);
     const [isYellowLedOn, setIsYellowLedOn] = useState(false);
     const [isGreenLedOn, setIsGreenLedOn] = useState(false);// comando que você deseja enviar
+    const [isRedLed2On, setIsRedLed2On] = useState(false);
 
     const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
@@ -84,6 +85,30 @@ const toggleRedLed2 = () => {
   setIsRedLedOn(!isRedLedOn);
 };
 
+const toggleGreenLed2 = () => {
+  let data = isGreenLedOn ? '50' : '51'; 
+  sendMessage(data);
+  setIsGreenLedOn(!isGreenLedOn);
+
+};
+const toggleRedLed3 = () => {
+  let data = isRedLedOn ? '60' : '61'; 
+  sendMessage(data);
+  setIsRedLedOn(!isRedLedOn);
+};
+const toggleRedLed4 = () => {
+  let data = isRedLedOn ? '70' : '71'; 
+  sendMessage(data);
+  setIsRedLedOn(!isRedLedOn);
+};
+const toggleGreenLed3 = () => {
+  let data = isGreenLedOn ? '80' : '81'; 
+  sendMessage(data);
+  setIsGreenLedOn(!isGreenLedOn);
+
+};
+
+
    
 
     return(
@@ -104,10 +129,10 @@ const toggleRedLed2 = () => {
           
           
           <View style={styles.rightContainer}>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed2</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed3</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed3</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>Botão 8</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>GreenLed2</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>RedLed3</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>RedLed4</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>GreenLed3</Text></TouchableOpacity>
           </View>
           </View>
       </ImageBackground>
