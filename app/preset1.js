@@ -63,41 +63,54 @@ export default function PresetUm () {
   
 }
 const toggleRedLed = () => {
-  let data = isRedLedOn ? '0' : '1'; 
+  let data = isRedLedOn ? '10' : '11'; //Se for 11 liga, se for 10 desliga
   sendMessage(data);
   setIsRedLedOn(!isRedLedOn);
 };
 const toggleYellowLed = () => {
-  let data = isYellowLedOn ? '10' : '4'; 
+  let data = isYellowLedOn ? '20' : '21'; 
   sendMessage(data);
   setIsYellowLedOn(!isYellowLedOn);
 };
 const toggleGreenLed = () => {
-  let data = isGreenLedOn ? '11' : '5'; 
+  let data = isGreenLedOn ? '30' : '31'; 
   sendMessage(data);
   setIsGreenLedOn(!isGreenLedOn);
 
+};
+const toggleRedLed2 = () => {
+  let data = isRedLedOn ? '40' : '41'; 
+  sendMessage(data);
+  setIsRedLedOn(!isRedLedOn);
 };
 
    
 
     return(
-        <View style={styles.containerTelaPresetUm}>
-          <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
+      <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.imagePresetUm}>
 
-            <Text style={styles.title}>Tela de Preset 1</Text>
+          <Text style={styles.title}>Tela de Preset 1</Text>
             
 
-            <TouchableOpacity onPress={() => {
-          navigation.goBack();}} style={styles.botaoVoltar}>
-            <Icon name="arrow-left"/>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15}}onPress={toggleRedLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15}}onPress={toggleYellowLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15, marginBottom:50}}onPress={toggleGreenLed}><Text style={{color:"black",fontSize:35,padding:20}}>Clique</Text></TouchableOpacity>
-          </ImageBackground>
-        </View>
+          <TouchableOpacity onPress={() => {navigation.goBack();}} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
+          
+          <View style={styles.colunas}>
+          <View style={styles.leftContainer}>
+          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15,marginBottom:30}}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15,marginBottom:30}}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed2</Text></TouchableOpacity>
+          </View>
+          
+          
+          <View style={styles.rightContainer}>
+          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed2</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed3</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed3</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>Botão 8</Text></TouchableOpacity>
+          </View>
+          </View>
+      </ImageBackground>
         
     )
 

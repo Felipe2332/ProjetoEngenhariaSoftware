@@ -25,9 +25,41 @@ export const styles = StyleSheet.create({
   },
   containerTelaPresetUm:{
     flex: 1,
-    justifyContent:"center",
+    flexDirection:"row",
+    justifyContent:"space-around",
     alignItems:"center",
+  },
+  imagePresetUm:{
+    flex: 1,
+  },
+  colunas:{
+    flexDirection:"row",
+    alignItems:"center",
+    marginTop:50
     
+  },
+  textoBotaoDentroPreset:{
+    color:"black",
+    fontSize:25,
+    padding:15,
+    textAlign:"center"
+  },
+  
+  leftContainer: {
+    flex: 1,
+    margin:25,
+  },
+  rightContainer: {
+    flex: 1,
+    margin:25,
+  },
+  
+  image:{
+    height:"100%",
+    width:"100%",
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems:'center',
   },
   presetButtonTop: {
     flex: 0.15,
@@ -87,14 +119,7 @@ export const styles = StyleSheet.create({
     fontSize:30,
     color:"white",
   },
-  image:{
-    height:"100%",
-    width:"100%",
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems:'center',
-    
-  },
+  
   
   scrollContainer: {
     padding: 16,
