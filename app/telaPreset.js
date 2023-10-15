@@ -16,7 +16,7 @@ export default function TelaPreset () {
 
           <StatusBar style="auto"/>
 
-            <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.image}>
+            <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.image}>
             
 
             <TouchableOpacity onPress={() => {

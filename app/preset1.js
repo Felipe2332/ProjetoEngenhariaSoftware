@@ -13,7 +13,6 @@ const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
-
 export default function PresetUm () {
 
     const navigation = useNavigation();
@@ -21,7 +20,6 @@ export default function PresetUm () {
     const [isRedLedOn, setIsRedLedOn] = useState(false);
     const [isYellowLedOn, setIsYellowLedOn] = useState(false);
     const [isGreenLedOn, setIsGreenLedOn] = useState(false);// comando que você deseja enviar
-    const [isRedLed2On, setIsRedLed2On] = useState(false);
 
     const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
@@ -112,7 +110,7 @@ const toggleGreenLed3 = () => {
    
 
     return(
-      <ImageBackground source={require('../assets/imagemFundoMinimalista.jpg')} style={styles.imagePresetUm}>
+      <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
 
           <Text style={styles.title}>Tela de Preset 1</Text>
             
@@ -121,9 +119,9 @@ const toggleGreenLed3 = () => {
           
           <View style={styles.colunas}>
           <View style={styles.leftContainer}>
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15,marginBottom:30}}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15,marginBottom:30}}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>Clique</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>RedLead</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15,marginBottom:30}}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>YellowLed</Text></TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15,marginBottom:30}}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed</Text></TouchableOpacity>
           <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed2</Text></TouchableOpacity>
           </View>
           

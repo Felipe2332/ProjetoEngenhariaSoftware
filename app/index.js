@@ -160,14 +160,13 @@ const App = () => {
   return (
     
     
-    
     <SafeAreaView style={styles.container}>
     <StatusBar backgroundColor={'black'}/>
-    <ImageBackground source={require('../assets/Gray-background-iphone.jpg')} style={styles.imageIndex}>
+    <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imageIndex}>
     
       <View>
       
-      <TouchableOpacity style={{backgroundColor:"darkgrey",marginLeft:200,marginTop:20,alignItems:"center",borderRadius:15, right: 0 }}onPress={handlePress}><Icon style={{fontSize:30}} name="arrow-right"></Icon></TouchableOpacity>
+      <TouchableOpacity style={{backgroundColor:"#00bfff",marginLeft:200,marginTop:20,alignItems:"center",borderRadius:15, right: 0 }}onPress={handlePress}><Icon style={{fontSize:30}} name="arrow-right"></Icon></TouchableOpacity>
       
         <Text
           style={

@@ -7,13 +7,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: windowHeight,
-    paddingHorizontal: 10,
     backgroundColor:"black"
   },
   imageIndex:{
     height:"100%",
     width:"100%",
     flex: 1,
+    
+    
   },
   containerTelaPreset:{
     flex: 1,
@@ -147,6 +148,8 @@ export const styles = StyleSheet.create({
     fontFamily:"Inter-Black",
     backgroundColor: 'gold',
     padding: 10,
+    marginLeft:10,
+    marginRight:10,
     borderRadius: 5,
     marginBottom: 20,
   },
@@ -172,11 +175,13 @@ export const styles = StyleSheet.create({
     color:"white",
   },
   deviceName: {
+    marginLeft:10,
     fontSize: 22,
     fontWeight: 'bold',
     color:"white",
   },
   deviceInfo: {
+    marginLeft:10,
     fontSize: 14,
     color:"white",
   },
@@ -186,5 +191,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     paddingHorizontal: 20,
+    marginRight:10
   },
 });
