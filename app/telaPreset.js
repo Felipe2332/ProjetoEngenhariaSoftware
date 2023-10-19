@@ -10,6 +10,8 @@ export default function TelaPreset () {
 
     const navigation = useNavigation();
 
+    
+
 
     return(
         <View style={styles.containerTelaPreset}>
