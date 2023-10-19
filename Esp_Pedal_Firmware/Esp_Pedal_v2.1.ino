@@ -1,3 +1,5 @@
+/*Essa versão implementa uma latching switch, que envia sinais de status para um aplicativo de controle*/
+
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
