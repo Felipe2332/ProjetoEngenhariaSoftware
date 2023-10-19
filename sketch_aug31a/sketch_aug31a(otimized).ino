@@ -6,9 +6,11 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 
-// Definição dos pinos e status dos LEDs
-const int pins[] = {2, 4, 5, 18, 19, 21, 22, 23};
-bool pinStatus[] = {false, false, false, false, false, false, false, false};
+// Definição dos pinos GPIO
+const int numPins = 8; // Quantidade de pinos usados
+const int pins[numPins] = {2, 4, 5, 18, 19, 21, 22, 23}; // Definição de GPIOs
+
+bool pinStatus[numPins] = {false}; // Inicialização de array de status dos pinos
 
 // Classe de Callbacks para a característica BLE
 class MyCallbacks : public BLECharacteristicCallbacks {
@@ -16,13 +18,12 @@ class MyCallbacks : public BLECharacteristicCallbacks {
     // Obtém o valor escrito na característica BLE
     std::string value = pCharacteristic->getValue();
     
-    for (int i = 0; i < 8; i++) {
-      if (value == std::to_string(10 * i + 1)) {
+    for (int i = 0; i < numPins; i++) {
+      if (value == std::to_string(10 * (i+1) + 1)) {
         digitalWrite(pins[i], HIGH);
         pinStatus[i] = true;
-      } else if (value == std::to_string(10 * i)) {
-        digitalWrite(pins[i], LOW);
-        pinStatus[i] = false;
+      } else if (value == std::to_string(10 * (i+1))) {
+        digitalWrite(pins[i], LOW);       
       }
     }
   }
@@ -30,7 +31,7 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 
 void setup() {
   // Configura os pinos como saídas e define o estado inicial como LOW (desligado)
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < numPins; i++) {
     pinMode(pins[i], OUTPUT);
     digitalWrite(pins[i], LOW);
   }
