@@ -1,3 +1,4 @@
+// Controle de 8 saídas via requisição Bluetooth
 // Definição dos UUIDs para o serviço e característica Bluetooth
 #define SERVICE_UUID        "abcd1234-ab12-cd34-a123-456789abcdef"
 #define CHARACTERISTIC_UUID "abcd1234-ab12-cd34-a123-456789abcdef"
