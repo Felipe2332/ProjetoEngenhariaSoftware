@@ -1,3 +1,12 @@
+/*Esse código implementa uma latching switch que envia status da porta via Bluetooth, sendo:
+  porta 25 desligada = 100;
+  porta 25 ligada = 101;
+  porta 26 desligada = 200;
+  porta 26 ligada = 201;
+  porta 27 desligada = 300;
+  porta 27 ligada = 301;
+*/
+
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
