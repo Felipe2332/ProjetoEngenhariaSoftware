@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 import BleManager from 'react-native-ble-manager';
 import { NativeEventEmitter, NativeModules } from 'react-native';
 import { stringToBytes } from "convert-string";
@@ -15,6 +16,7 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function PresetUm () {
+  
 
     const navigation = useNavigation();
     const [isLedOn, setIsLedOn] = useState(false);
@@ -90,7 +92,6 @@ export default function PresetUm () {
     };
 
   useEffect(() => {
-    
     carregarPreset('preset1');
   }, []);
   

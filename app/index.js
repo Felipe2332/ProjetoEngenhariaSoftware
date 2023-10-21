@@ -47,6 +47,7 @@ const App = () => {
     });
   };
   useEffect(() => {
+  
     BleManager.enableBluetooth().then(() => {
       console.log('Bluetooth is turned on!');
     });

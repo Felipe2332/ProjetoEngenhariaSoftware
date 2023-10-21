@@ -184,7 +184,7 @@ const toggleGreenLed3 = () => {
     return(
       <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
 
-          <Text style={styles.title}>Tela de Preset 2</Text>
+          <Text style={styles.title}>Tela de Preset 3</Text>
             
 
           <TouchableOpacity onPress={() =>  {handleSave('preset3'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
