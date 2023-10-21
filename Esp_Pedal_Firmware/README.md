@@ -1,6 +1,6 @@
-Entendendo o Código do Latching Switch com Bluetooth
+# Entendendo o Código do Latching Switch com Bluetooth
 
-Este documento oferece uma explicação detalhada do código que implementa um latching switch e envia sinais de status via Bluetooth em um dispositivo ESP32.
+## Este documento oferece uma explicação detalhada do código que implementa um latching switch e envia sinais de status via Bluetooth em um dispositivo ESP32.
 
 1. Importação das Bibliotecas
 O código começa importando as bibliotecas necessárias para a funcionalidade BLE (Bluetooth Low Energy) e define as constantes que representam os pinos GPIO usados e o número total de pinos.
