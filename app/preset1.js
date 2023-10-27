@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 
 
@@ -24,7 +25,6 @@ export default function PresetUm () {
     animationRef.current.play();
   };
   
-
     const navigation = useNavigation();
     const [isLedOn, setIsLedOn] = useState(false);
     const [isLed1On, setIsLed1On] = useState(false);
@@ -197,7 +197,12 @@ const toggleGreenLed3 = () => {
         source={require('../assets/Animation - 1698361634538.json')} autoPlay={false} loop={false} onAnimationFinish={() => navigation.goBack()}
       />
 
-          <Text style={styles.title}>Tela de Preset 1</Text>
+      <Animatable.Text 
+      animation="flipInX"
+      duration={2000}
+      direction="alternate" style={styles.title}>
+      Tela de preset 1
+      </Animatable.Text>
 
           <TouchableOpacity onPress={() =>  {handleSave('preset1'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
         
