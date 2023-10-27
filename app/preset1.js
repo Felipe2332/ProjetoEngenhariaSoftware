@@ -18,7 +18,7 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function PresetUm () {
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const animationRef = useRef();
   const startAnimation = () => {
     animationRef.current.play();
@@ -59,7 +59,6 @@ export default function PresetUm () {
     const handleSave = (presetName) => {
       // Salva o estado atual dos LEDs
       animationRef.current.play();
-      setShowAnimation(true);
       salvarPreset(presetName);
       const sendCommands = (commands) => {
         for (let command of commands) {
@@ -193,37 +192,36 @@ const toggleGreenLed3 = () => {
 
     return(
       <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
+        <LottieView style={styles.animation}
+        ref={animationRef}
+        source={require('../assets/Animation - 1698361634538.json')} autoPlay={false} loop={false} onAnimationFinish={() => navigation.goBack()}
+      />
 
           <Text style={styles.title}>Tela de Preset 1</Text>
-          <LottieView style={styles.animation}
-        ref={animationRef}
-        source={require('../assets/Animation - 1698361634538.json')} autoPlay={false} loop={false} onAnimationFinish={() => {setShowAnimation(false); navigation.goBack();}}
-      />
-            
 
           <TouchableOpacity onPress={() =>  {handleSave('preset1'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
-          
-          
+        
           <View style={styles.colunas}>
           <View style={styles.leftContainer}>
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>RedLead</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15,marginBottom:30}}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>YellowLed</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15,marginBottom:30}}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed2</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>1</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>2</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>3</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>4</Text></TouchableOpacity>
           </View>
           
           
           <View style={styles.rightContainer}>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>GreenLed2</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>RedLed3</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>RedLed4</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>GreenLed3</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>5</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>6</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>7</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>8</Text></TouchableOpacity>
           </View>
           
           </View>
-          <TouchableOpacity onPress={() => handleSave('preset1')} style={{backgroundColor:"blue",justifyContent: 'center',
-  alignItems: 'center'}}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+          
+          <TouchableOpacity onPress={() => handleSave('preset1')} style={styles.botaoSalvarPreset}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
       </ImageBackground>
+      
         
     )
 

@@ -121,10 +121,26 @@ export const styles = StyleSheet.create({
     color:"white",
   },
   animation:{
-    width: '100%', // Ajuste a largura conforme necessário
-    height: '100%', // Ajuste a altura conforme necessário
-    position: 'absolute', // Posiciona a animação sobre os outros componentes
-    
+    position:'absolute',
+    zIndex:1,
+    resizeMode:'cover',
+    alignSelf:'center',
+    top:250,
+    width:200,
+    height:100,
+  },
+  botaoConfigPreset:{
+    backgroundColor:'gold',
+    borderRadius:15,
+    marginBottom:30,
+  },
+  botaoSalvarPreset:{
+  backgroundColor:"blue",
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginRight:10,
+  marginLeft:10,
+  borderRadius:15
   },
   
   
