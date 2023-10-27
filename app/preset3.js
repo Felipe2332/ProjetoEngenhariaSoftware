@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef} from 'react';
 import { View, Text, TouchableOpacity,ImageBackground} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/styles'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import LottieView from 'lottie-react-native';
 
 import BleManager from 'react-native-ble-manager';
 import { NativeEventEmitter, NativeModules } from 'react-native';
@@ -15,6 +15,10 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function PresetUm () {
+  const animationRef = useRef();
+  const startAnimation = () => {
+    animationRef.current.play();
+  };
 
     const navigation = useNavigation();
     const [isLedOn, setIsLedOn] = useState(false);
@@ -57,7 +61,7 @@ export default function PresetUm () {
       };
       let commands = ['10', '20', '30','40','50','60','70','80','90'];
       sendCommands(commands);
-      navigation.goBack();
+      
     };
 
     const carregarPreset = async (presetName) => {
@@ -206,7 +210,13 @@ const toggleGreenLed3 = () => {
           </View>
           
           </View>
-          <TouchableOpacity onPress={() => handleSave('preset3')} style={{backgroundColor:"blue"}}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => handleSave('preset3')} style={{backgroundColor:"blue",justifyContent: 'center',alignItems: 'center'}}><LottieView style={styles.animation}
+        ref={animationRef}
+        source={require('../assets/Animation - 1698361634538.json')} // Substitua pelo caminho da sua animação
+        autoPlay={false}
+        loop={false}
+        onAnimationFinish={() => navigation.goBack()}/>
+        <Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
       </ImageBackground>
         
     )
