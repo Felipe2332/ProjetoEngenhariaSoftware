@@ -9,7 +9,6 @@ import telaPreset from './telaPreset';
   const Stack = createNativeStackNavigator();
   
   function App() {
-    
     return (
       <NavigationContainer >
         <Stack.Navigator initialRouteName="Home" >
