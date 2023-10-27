@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/styles'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BleManager from 'react-native-ble-manager';
+import { useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { stringToBytes } from "convert-string";
 
@@ -15,6 +17,8 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function TelaPreset () {
+  
+    
     const navigation = useNavigation();
     let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
     let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
@@ -67,7 +71,7 @@ export default function TelaPreset () {
   }, []);
 
     return(
-        <View style={styles.containerTelaPreset}>
+        <Animated.View style={styles.containerTelaPreset}>
 
           <StatusBar style="auto"/>
 
@@ -76,8 +80,8 @@ export default function TelaPreset () {
             <TouchableOpacity onPress={() => {
             navigation.goBack();}} style={styles.botaoVoltar}>
             <Icon name="arrow-left"/>
-
             </TouchableOpacity>
+            
             
             <Text style={[styles.title]}>Bem vindo à tela de presets</Text>
             <TouchableOpacity onPress={() => navigation.navigate('preset1')} style={styles.presetButtonTop}><Text style={styles.textButtonPreset}>Preset 1</Text></TouchableOpacity>
@@ -85,6 +89,6 @@ export default function TelaPreset () {
             <TouchableOpacity onPress={() => navigation.navigate('preset3')}style={styles.presetButtonBottom}><Text style={styles.textButtonPreset}>Preset 3</Text></TouchableOpacity>
 
           </ImageBackground>
-        </View>
+        </Animated.View>
     )
 };
