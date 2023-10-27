@@ -122,9 +122,9 @@ export const styles = StyleSheet.create({
   },
   animation:{
     width: '100%', // Ajuste a largura conforme necessário
-    height: '150%', // Ajuste a altura conforme necessário
+    height: '100%', // Ajuste a altura conforme necessário
     position: 'absolute', // Posiciona a animação sobre os outros componentes
-    zIndex: 1, // Garante que a animação esteja no topo
+    
   },
   
   

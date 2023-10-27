@@ -9,8 +9,12 @@ import telaPreset from './telaPreset';
     return (
       <NavigationContainer >
         <Stack.Navigator initialRouteName="Home" >
-          <Stack.Screen name="index" component={index}  />
-          <Stack.Screen name="telaPreset" component={telaPreset} />
+          <Stack.Screen name="index" component={index}  options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}/>
+          <Stack.Screen name="telaPreset" component={telaPreset} options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}/>
           <Stack.Screen name='presetUm' component={preset1}/>
           <Stack.Screen name='presetDois' component={preset2}/>
           <Stack.Screen name='presetTres' component={preset3}/>

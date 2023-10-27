@@ -54,6 +54,7 @@ export default function PresetUm () {
     const handleSave = (presetName) => {
       // Salva o estado atual dos LEDs
       salvarPreset(presetName);
+      animationRef.current.play();
       const sendCommands = (commands) => {
         for (let command of commands) {
           sendMessage(command);
@@ -61,7 +62,6 @@ export default function PresetUm () {
       };
       let commands = ['10', '20', '30','40','50','60','70','80','90'];
       sendCommands(commands);
-      
     };
 
     const carregarPreset = async (presetName) => {

@@ -18,6 +18,7 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function PresetUm () {
+  const [showAnimation, setShowAnimation] = useState(false);
   const animationRef = useRef();
   const startAnimation = () => {
     animationRef.current.play();
@@ -58,6 +59,7 @@ export default function PresetUm () {
     const handleSave = (presetName) => {
       // Salva o estado atual dos LEDs
       animationRef.current.play();
+      setShowAnimation(true);
       salvarPreset(presetName);
       const sendCommands = (commands) => {
         for (let command of commands) {
@@ -99,6 +101,7 @@ export default function PresetUm () {
 
   useEffect(() => {
     carregarPreset('preset1');
+    
   }, []);
   
 
@@ -192,6 +195,10 @@ const toggleGreenLed3 = () => {
       <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
 
           <Text style={styles.title}>Tela de Preset 1</Text>
+          <LottieView style={styles.animation}
+        ref={animationRef}
+        source={require('../assets/Animation - 1698361634538.json')} autoPlay={false} loop={false} onAnimationFinish={() => {setShowAnimation(false); navigation.goBack();}}
+      />
             
 
           <TouchableOpacity onPress={() =>  {handleSave('preset1'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
@@ -215,13 +222,7 @@ const toggleGreenLed3 = () => {
           
           </View>
           <TouchableOpacity onPress={() => handleSave('preset1')} style={{backgroundColor:"blue",justifyContent: 'center',
-  alignItems: 'center'}}><LottieView style={styles.animation}
-        ref={animationRef}
-        source={require('../assets/Animation - 1698361634538.json')} // Substitua pelo caminho da sua animação
-        autoPlay={false}
-        loop={false}
-        onAnimationFinish={() => navigation.goBack()}
-      /><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+  alignItems: 'center'}}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
       </ImageBackground>
         
     )
