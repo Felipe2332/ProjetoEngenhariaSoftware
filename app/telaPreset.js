@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BleManager from 'react-native-ble-manager';
 import { useSharedValue, withSpring } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
-
+import * as Animatable from 'react-native-animatable';
 import { stringToBytes } from "convert-string";
 
 import { AsyncStorage } from 'react-native';
@@ -69,9 +69,15 @@ export default function TelaPreset () {
       });
       
   }, []);
+  const AnimatedButton = ({ navigation }) => {
+    let animationRef = useRef(null);
+  
+    const handlePress = (route) => {
+      animationRef.fadeOut().then(endState => navigation.navigate(route));
+    };}  
 
     return(
-        <Animated.View style={styles.containerTelaPreset}>
+        <View style={styles.containerTelaPreset}>
 
           <StatusBar style="auto"/>
 
@@ -83,12 +89,27 @@ export default function TelaPreset () {
             </TouchableOpacity>
             
             
-            <Text style={[styles.title]}>Bem vindo à tela de presets</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('preset1')} style={styles.presetButtonTop}><Text style={styles.textButtonPreset}>Preset 1</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('preset2')}style={styles.presetButtonMiddle}><Text style={styles.textButtonPreset}>Preset 2</Text></TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('preset3')}style={styles.presetButtonBottom}><Text style={styles.textButtonPreset}>Preset 3</Text></TouchableOpacity>
+            <Animatable.Text style={styles.title} animation="flipInX" duration={2000} direction="alternate">Bem vindo à tela de presets</Animatable.Text>
+
+            <Animatable.View animation="fadeInLeft" delay={100} style={styles.presetButtonTop}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset1')} >
+              <Text style={styles.textButtonPreset}>Preset 1</Text>
+            </TouchableOpacity>
+            </Animatable.View>
+            
+            <Animatable.View animation="fadeInLeft" delay={300} style={styles.presetButtonMiddle}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset2')}>
+              <Text style={styles.textButtonPreset}>Preset 2</Text>
+            </TouchableOpacity>
+            </Animatable.View>
+
+            <Animatable.View animation="fadeInLeftBig" delay={500} style={styles.presetButtonBottom}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset3')}>
+              <Animatable.Text style={styles.textButtonPreset} animation="bounceIn" duration={2000}>Preset 3</Animatable.Text>
+              </TouchableOpacity>
+            </Animatable.View>
 
           </ImageBackground>
-        </Animated.View>
+        </View>
     )
 };

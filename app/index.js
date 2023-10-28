@@ -163,7 +163,7 @@ const App = () => {
     
     
     <SafeAreaView style={styles.container}>
-    <StatusBar backgroundColor={'black'}/>
+    <StatusBar />
     <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imageIndex}>
     
       <Animated.View>
