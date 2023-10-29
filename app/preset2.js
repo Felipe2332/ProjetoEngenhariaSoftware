@@ -5,6 +5,7 @@ import { styles } from '../styles/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 import BleManager from 'react-native-ble-manager';
 import { NativeEventEmitter, NativeModules } from 'react-native';
@@ -188,35 +189,66 @@ const toggleGreenLed3 = () => {
     return(
       <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
 
-          <Text style={styles.title}>Tela de Preset 2</Text>
+    <LottieView style={styles.animation}
+        ref={animationRef}
+        source={require('../assets/Animation - 1698361634538.json')} autoPlay={false} loop={false} onAnimationFinish={() => navigation.goBack()}
+      />
+
+      <Animatable.Text 
+      animation="flipInX"
+      duration={2000}
+      direction="alternate" style={styles.title}>
+      Tela de preset 2
+      </Animatable.Text>
             
 
           <TouchableOpacity onPress={() =>  {handleSave('preset2'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
           
           <View style={styles.colunas}>
           <View style={styles.leftContainer}>
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>RedLead</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#ffd700',borderRadius:15,marginBottom:30}}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>YellowLed</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'#adff2f',borderRadius:15,marginBottom:30}}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>GreenLed</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>RedLed2</Text></TouchableOpacity>
+          <Animatable.View animation="flipInX" delay={100}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>1</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={200}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleYellowLed} hitSlop={{right:55}}><Text style={styles.textoBotaoDentroPreset}>2</Text></TouchableOpacity>
+
+          </Animatable.View>
+          <Animatable.View animation="flipInX" delay={300}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>3</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={400}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>4</Text></TouchableOpacity>
+          </Animatable.View>
+
           </View>
           
           
           <View style={styles.rightContainer}>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>GreenLed2</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:'red',borderRadius:15,marginBottom:30}}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>RedLed3</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"red",borderRadius:15,marginBottom:30}}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>RedLed4</Text></TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:"#adff2f",borderRadius:15,marginBottom:30}}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>GreenLed3</Text></TouchableOpacity>
+          <Animatable.View animation="flipInX" delay={500}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>5</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={600}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>6</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={700}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>7</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={800}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>8</Text></TouchableOpacity>
+          </Animatable.View>
+
           </View>
           
           </View>
-          <TouchableOpacity onPress={() => handleSave('preset2')} style={{backgroundColor:"blue",justifyContent: 'center',alignItems: 'center'}}><LottieView style={styles.animation}
-        ref={animationRef}
-        source={require('../assets/Animation - 1698361634538.json')} // Substitua pelo caminho da sua animação
-        autoPlay={false}
-        loop={false}
-        onAnimationFinish={() => navigation.goBack()}/>
-        <Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+
+          <Animatable.View animation="fadeInLeftBig" delay={500} >
+          <TouchableOpacity onPress={() => handleSave('preset2')} style={styles.botaoSalvarPreset}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+          </Animatable.View>
       </ImageBackground>
         
     )

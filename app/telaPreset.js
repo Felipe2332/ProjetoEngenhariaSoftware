@@ -33,7 +33,7 @@ export default function TelaPreset () {
       await BleManager.retrieveServices(peripheralId);
       // Start notification for this characteristic
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      BleManager.startNotification(peripheralId, serviceUUID, characteristicUUID);
+      
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
@@ -91,20 +91,20 @@ export default function TelaPreset () {
             
             <Animatable.Text style={styles.title} animation="flipInX" duration={2000} direction="alternate">Bem vindo à tela de presets</Animatable.Text>
 
-            <Animatable.View animation="fadeInLeft" delay={100} style={styles.presetButtonTop}>
-            <TouchableOpacity onPress={() => navigation.navigate('preset1')} >
+            <Animatable.View animation="fadeInLeftBig" delay={100} style={styles.presetButtonTop}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset1')} hitSlop={{ top: 25, bottom: 25, left: 125, right: 125 }} >
               <Text style={styles.textButtonPreset}>Preset 1</Text>
             </TouchableOpacity>
             </Animatable.View>
             
-            <Animatable.View animation="fadeInLeft" delay={300} style={styles.presetButtonMiddle}>
-            <TouchableOpacity onPress={() => navigation.navigate('preset2')}>
+            <Animatable.View animation="fadeInLeftBig" delay={300} style={styles.presetButtonMiddle}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset2')} hitSlop={{ top: 25, bottom: 25, left: 125, right: 125 }}>
               <Text style={styles.textButtonPreset}>Preset 2</Text>
             </TouchableOpacity>
             </Animatable.View>
 
             <Animatable.View animation="fadeInLeftBig" delay={500} style={styles.presetButtonBottom}>
-            <TouchableOpacity onPress={() => navigation.navigate('preset3')}>
+            <TouchableOpacity onPress={() => navigation.navigate('preset3')} hitSlop={{ top: 25, bottom: 25, left: 125, right: 125 }}>
               <Animatable.Text style={styles.textButtonPreset} animation="bounceIn" duration={2000}>Preset 3</Animatable.Text>
               </TouchableOpacity>
             </Animatable.View>

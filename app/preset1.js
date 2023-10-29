@@ -199,32 +199,58 @@ const toggleGreenLed3 = () => {
 
       <Animatable.Text 
       animation="flipInX"
-      duration={2000}
+      duration={2800}
       direction="alternate" style={styles.title}>
       Tela de preset 1
       </Animatable.Text>
 
           <TouchableOpacity onPress={() =>  {handleSave('preset1'); navigation.navigate('telaPreset') }} style={styles.botaoVoltar}><Icon name="arrow-left"/></TouchableOpacity>
-        
+          
           <View style={styles.colunas}>
           <View style={styles.leftContainer}>
+          <Animatable.View animation="flipInX" delay={100}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed}><Text style={styles.textoBotaoDentroPreset}>1</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleYellowLed}><Text style={styles.textoBotaoDentroPreset}>2</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={200}>
+          <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleYellowLed} hitSlop={{right:55}}><Text style={styles.textoBotaoDentroPreset}>2</Text></TouchableOpacity>
+
+          </Animatable.View>
+          <Animatable.View animation="flipInX" delay={300}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed}><Text style={styles.textoBotaoDentroPreset}>3</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={400}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed2}><Text style={styles.textoBotaoDentroPreset}>4</Text></TouchableOpacity>
+          </Animatable.View>
+
           </View>
           
           
           <View style={styles.rightContainer}>
+          <Animatable.View animation="flipInX" delay={500}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed2}><Text style={styles.textoBotaoDentroPreset}>5</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={600}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed3}><Text style={styles.textoBotaoDentroPreset}>6</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={700}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleRedLed4}><Text style={styles.textoBotaoDentroPreset}>7</Text></TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation="flipInX" delay={800}>
           <TouchableOpacity style={styles.botaoConfigPreset}onPress={toggleGreenLed3}><Text style={styles.textoBotaoDentroPreset}>8</Text></TouchableOpacity>
+          </Animatable.View>
+
           </View>
           
           </View>
           
+          <Animatable.View animation="fadeInLeftBig" delay={500} >
           <TouchableOpacity onPress={() => handleSave('preset1')} style={styles.botaoSalvarPreset}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
+          </Animatable.View>
       </ImageBackground>
       
         

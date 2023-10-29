@@ -72,6 +72,7 @@ export const styles = StyleSheet.create({
     textAlign:"center",
     alignItems:"center",
     width:"90%",
+    
   },
   presetButtonMiddle: {
     flex: 0.15,
@@ -97,8 +98,7 @@ export const styles = StyleSheet.create({
   textButtonPreset:{
     fontSize:30,
     fontFamily:"Inter-Black",
-    
-    
+
   },
   botaoVoltar:{
     position: 'absolute',
@@ -138,6 +138,8 @@ export const styles = StyleSheet.create({
   backgroundColor:"blue",
   justifyContent: 'center',
   alignItems: 'center',
+  height:50,
+  marginTop:75,
   marginRight:10,
   marginLeft:10,
   borderRadius:15
