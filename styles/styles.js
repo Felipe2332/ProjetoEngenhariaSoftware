@@ -139,10 +139,11 @@ export const styles = StyleSheet.create({
   justifyContent: 'center',
   alignItems: 'center',
   height:50,
-  marginTop:75,
+  marginTop:"5%",
   marginRight:10,
   marginLeft:10,
-  borderRadius:15
+  borderRadius:15,
+  
   },
   
   
