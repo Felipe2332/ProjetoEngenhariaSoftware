@@ -24,8 +24,6 @@ export default function TelaPreset () {
     let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
     let characteristicUUID = "bbcd1234-ab12-cd34-a123-456789abcdef"; // UUID da característica
 
-
-
     async function connectAndPrepare(peripheralId, serviceUUID, characteristicUUID) {
       // Connect to device
       await BleManager.connect(peripheralId);
