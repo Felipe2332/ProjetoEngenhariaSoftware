@@ -143,7 +143,6 @@ export const styles = StyleSheet.create({
   marginRight:10,
   marginLeft:10,
   borderRadius:15,
-  
   },
   
   
