@@ -115,10 +115,7 @@ export default function PresetUm () {
         // Success code
         console.log("Modulo ta bao");
       });
-      BleManager.scan([], 5, true).then(() => {
-        // Success code
-        console.log("Scan started");
-      });
+      
       BleManager.connect("B0:A7:32:15:39:42")
       
       
