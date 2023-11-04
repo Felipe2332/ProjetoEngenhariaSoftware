@@ -38,7 +38,7 @@ export default function TelaPreset () {
       await BleManager.retrieveServices(peripheralId);
       // Start notification for this characteristic
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      
+      await BleManager.startNotification(peripheralId, serviceUUID, characteristicUUID);
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
