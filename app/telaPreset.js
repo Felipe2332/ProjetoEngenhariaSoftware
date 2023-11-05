@@ -39,6 +39,7 @@ export default function TelaPreset () {
     const [isLed6On, setIsLed6On] = useState(false);
     const [isLed7On, setIsLed7On] = useState(false);
     const [isLed8On, setIsLed8On] = useState(false);
+    
 
     async function connectAndPrepare(peripheralId, serviceUUID, characteristicUUID) {
       // Connect to device
@@ -47,7 +48,7 @@ export default function TelaPreset () {
       await BleManager.retrieveServices(peripheralId);
       // Start notification for this characteristic
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      
+      BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
@@ -81,80 +82,80 @@ export default function TelaPreset () {
 
       const toggleRedLed = () => {
         let data = isLed1On ? '10' : '11'; //Se for 11 liga, se for 10 desliga
-        sendMessage(data);
+        sendMessage(data,setIsLed1On);
         setIsLed1On(!isLed1On);
         console.log(`isLed1On: ${!isLed1On}`);
       };
       const toggleYellowLed = () => {
         let data = isLed2On ? '20' : '21'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed2On);
         setIsLed2On(!isLed2On);
       };
       const toggleGreenLed = () => {
         let data = isLed3On ? '30' : '31'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed3On);
         setIsLed3On(!isLed3On);
       
       };
       const toggleRedLed2 = () => {
         let data = isLed4On ? '40' : '41'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed4On);
         setIsLed4On(!isLed4On);
       };
       
       const toggleGreenLed2 = () => {
         let data = isLed5On ? '50' : '51'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed5On);
         setIsLed5On(!isLed5On);
       
       };
       const toggleRedLed3 = () => {
         let data = isLed6On ? '60' : '61'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed6On);
         setIsLed6On(!isLed6On);
       };
       const toggleRedLed4 = () => {
         let data = isLed7On ? '70' : '71'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed7On);
         setIsLed7On(!isLed7On);
       };
       const toggleGreenLed3 = () => {
         let data = isLed8On ? '80' : '81'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed8On);
         setIsLed8On(!isLed8On);
       };
 
       const desligarTodosLeds = () => {
         let data = '10'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed1On);
         setIsLed1On(false);
       
         data = '20'; 
-        sendMessage(data);
+        sendMessage(data,setIsLed2On);
         setIsLed2On(false);
 
         data = '30';
-        sendMessage (data);
+        sendMessage (data,setIsLed3On);
         setIsLed3On(false);
 
         data = '40';
-        sendMessage(data);
+        sendMessage(data,setIsLed4On);
         setIsLed4On(false);
 
         data = '50';
-        sendMessage(data);
+        sendMessage(data,setIsLed5On);
         setIsLed5On(false);
 
         data = '60';
-        sendMessage(data);
+        sendMessage(data,setIsLed6On);
         setIsLed6On(false);
 
         data = '70';
-        sendMessage(data);
+        sendMessage(data,setIsLed7On);
         setIsLed7On(false);
 
         data = '80';
-        sendMessage(data);
+        sendMessage(data,setIsLed8On);
         setIsLed8On(false);
       
       };

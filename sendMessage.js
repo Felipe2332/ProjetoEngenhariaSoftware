@@ -5,11 +5,11 @@ import React, { useState, useEffect,useRef} from 'react';
 
 
 
-export const sendMessage = (data) => {
+export const sendMessage = (data,setLedState) => {
     let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
     let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
     let characteristicUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID da característica
-    const [ledState, setLedState] = useState(false);
+    
     
     
     let bytes = stringToBytes(data); // Converte o comando em uma matriz de bytes
