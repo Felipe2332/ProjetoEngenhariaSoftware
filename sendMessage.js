@@ -5,10 +5,11 @@ import React, { useState, useEffect,useRef} from 'react';
 
 
 
-export const sendMessage = (data, setIsLedOn, setIsLed1On, setIsLed2On, setIsLed3On, setIsLed4On, setIsLed5On, setIsLed6On, setIsLed7On, setIsLed8On) => {
+export const sendMessage = (data) => {
     let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
     let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
     let characteristicUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID da característica
+    const [ledState, setLedState] = useState(false);
     
     
     let bytes = stringToBytes(data); // Converte o comando em uma matriz de bytes
@@ -33,7 +34,7 @@ export const sendMessage = (data, setIsLedOn, setIsLed1On, setIsLed2On, setIsLed
     .then(() => {
       // Sucesso ao escrever o comando
       console.log('Comando enviado');
-      setIsLedOn(prevState => !prevState);
+      setLedState(prevState => !prevState);
     })
       .catch((error) => {
       // Falha ao escrever o comando

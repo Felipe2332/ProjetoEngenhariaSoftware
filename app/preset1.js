@@ -19,7 +19,6 @@ const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 export default function PresetUm () {
-  const [isVisible, setIsVisible] = useState(false);
   const animationRef = useRef();
   const startAnimation = () => {
     animationRef.current.play();

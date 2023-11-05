@@ -30,6 +30,15 @@ export default function TelaPreset () {
     const [preset1Selected, setPreset1Selected] = useState(false);
     const [preset2Selected, setPreset2Selected] = useState(false);
     const [preset3Selected, setPreset3Selected] = useState(false);
+    const [isLedOn, setIsLedOn] = useState(false);
+    const [isLed1On, setIsLed1On] = useState(false);
+    const [isLed2On, setIsLed2On] = useState(false);
+    const [isLed3On, setIsLed3On] = useState(false);
+    const [isLed4On, setIsLed4On] = useState(false);
+    const [isLed5On, setIsLed5On] = useState(false);
+    const [isLed6On, setIsLed6On] = useState(false);
+    const [isLed7On, setIsLed7On] = useState(false);
+    const [isLed8On, setIsLed8On] = useState(false);
 
     async function connectAndPrepare(peripheralId, serviceUUID, characteristicUUID) {
       // Connect to device
@@ -38,7 +47,7 @@ export default function TelaPreset () {
       await BleManager.retrieveServices(peripheralId);
       // Start notification for this characteristic
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      await BleManager.startNotification(peripheralId, serviceUUID, characteristicUUID);
+      
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
@@ -69,26 +78,110 @@ export default function TelaPreset () {
           }
         }
       );
-      const carregarPreset = async (presetName, setLeds) => {
+
+      const toggleRedLed = () => {
+        let data = isLed1On ? '10' : '11'; //Se for 11 liga, se for 10 desliga
+        sendMessage(data);
+        setIsLed1On(!isLed1On);
+        console.log(`isLed1On: ${!isLed1On}`);
+      };
+      const toggleYellowLed = () => {
+        let data = isLed2On ? '20' : '21'; 
+        sendMessage(data);
+        setIsLed2On(!isLed2On);
+      };
+      const toggleGreenLed = () => {
+        let data = isLed3On ? '30' : '31'; 
+        sendMessage(data);
+        setIsLed3On(!isLed3On);
+      
+      };
+      const toggleRedLed2 = () => {
+        let data = isLed4On ? '40' : '41'; 
+        sendMessage(data);
+        setIsLed4On(!isLed4On);
+      };
+      
+      const toggleGreenLed2 = () => {
+        let data = isLed5On ? '50' : '51'; 
+        sendMessage(data);
+        setIsLed5On(!isLed5On);
+      
+      };
+      const toggleRedLed3 = () => {
+        let data = isLed6On ? '60' : '61'; 
+        sendMessage(data);
+        setIsLed6On(!isLed6On);
+      };
+      const toggleRedLed4 = () => {
+        let data = isLed7On ? '70' : '71'; 
+        sendMessage(data);
+        setIsLed7On(!isLed7On);
+      };
+      const toggleGreenLed3 = () => {
+        let data = isLed8On ? '80' : '81'; 
+        sendMessage(data);
+        setIsLed8On(!isLed8On);
+      };
+
+      const desligarTodosLeds = () => {
+        let data = '10'; 
+        sendMessage(data);
+        setIsLed1On(false);
+      
+        data = '20'; 
+        sendMessage(data);
+        setIsLed2On(false);
+
+        data = '30';
+        sendMessage (data);
+        setIsLed3On(false);
+
+        data = '40';
+        sendMessage(data);
+        setIsLed4On(false);
+
+        data = '50';
+        sendMessage(data);
+        setIsLed5On(false);
+
+        data = '60';
+        sendMessage(data);
+        setIsLed6On(false);
+
+        data = '70';
+        sendMessage(data);
+        setIsLed7On(false);
+
+        data = '80';
+        sendMessage(data);
+        setIsLed8On(false);
+      
+      };
+
+      const carregarPreset = async (presetName) => {
         try {
           let leds = await AsyncStorage.getItem(presetName);
           if (leds !== null) {
             leds = JSON.parse(leds);
             console.log(`Estado carregado para ${presetName}: ${leds}`);
-            setLeds(leds);
+
+            desligarTodosLeds();
       
-            // Envia os comandos para o ESP32 para acender os LEDs de acordo com o estado carregado
-            for (let i = 0; i < leds.length; i++) {
-              if (leds[i]) {
-                let command = `${(i + 1) * 10}`; // Assume que o comando para acender o LED é '10', '20', '30', etc.
-                sendMessage(data, setIsLedOn, setIsLed1On, setIsLed2On, setIsLed3On, setIsLed4On, setIsLed5On, setIsLed6On, setIsLed7On, setIsLed8On);
-              }
-            }
+            if (leds[0]) toggleRedLed();
+            if (leds[1]) toggleYellowLed();
+            if (leds[2]) toggleGreenLed();
+            if (leds[3]) toggleRedLed2();
+            if (leds[4]) toggleGreenLed2();
+            if (leds[5]) toggleRedLed3();
+            if (leds[6]) toggleRedLed4();
+            if (leds[7]) toggleGreenLed3();
           }
         } catch (error) {
           console.log(error);
         }
       };
+      
       
       // Actions triggereng BleManagerDidUpdateValueForCharacteristic event
       function bytesToString(bytes) {
