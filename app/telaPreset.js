@@ -39,16 +39,26 @@ export default function TelaPreset () {
     const [isLed6On, setIsLed6On] = useState(false);
     const [isLed7On, setIsLed7On] = useState(false);
     const [isLed8On, setIsLed8On] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSending, setIsSending] = useState(false);
     
 
     async function connectAndPrepare(peripheralId, serviceUUID, characteristicUUID) {
-      // Connect to device
+      if (isSending) {
+        // Já estamos enviando um comando, então retornamos imediatamente
+        return;
+      }
+      setIsSending(true);
       await BleManager.connect(peripheralId);
-      // Before startNotification you need to call retrieveServices
+
       await BleManager.retrieveServices(peripheralId);
-      // Start notification for this characteristic
+      //Falta desligar os leds quando entra na tela de preset para configurá-los
+      
+      
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
       BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
+  
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
@@ -60,28 +70,36 @@ export default function TelaPreset () {
               setPreset1Selected(true);
               setPreset2Selected(false);
               setPreset3Selected(false);
-              carregarPreset('preset1', setPreset1Leds);
+              if (!isLoading) {
+                setIsLoading(true);
+                carregarPreset('preset1', setPreset1Leds);
+              }
               break;
             case '3':
               setPreset1Selected(false);
               setPreset2Selected(true);
               setPreset3Selected(false);
-              carregarPreset('preset2', setPreset2Leds);
+              if (!isLoading) {
+                setIsLoading(true);
+                carregarPreset('preset2', setPreset2Leds);
+              }
               break;
             case '2':
               setPreset1Selected(false);
               setPreset2Selected(false);
               setPreset3Selected(true);
-              carregarPreset('preset3', setPreset3Leds);
+              if (!isLoading) {
+                setIsLoading(true);
+                carregarPreset('preset3', setPreset3Leds);
+              }
               break;
             default:
               console.log(`Received unknown data: ${data}`);
           }
-        }
-      );
+        });
 
       const toggleRedLed = () => {
-        let data = isLed1On ? '10' : '11'; //Se for 11 liga, se for 10 desliga
+        let data = isLed1On ? '10' : '11';
         sendMessage(data,setIsLed1On);
         setIsLed1On(!isLed1On);
         console.log(`isLed1On: ${!isLed1On}`);
@@ -180,6 +198,8 @@ export default function TelaPreset () {
           }
         } catch (error) {
           console.log(error);
+        }finally {
+          setIsLoading(false);
         }
       };
       
