@@ -174,7 +174,6 @@ export default function TelaPreset () {
         data = '80';
         sendMessage(data,setIsLed8On);
         setIsLed8On(false);
-      
       };
 
       const carregarPreset = async (presetName) => {
