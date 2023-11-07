@@ -55,7 +55,6 @@ export default function TelaPreset () {
       await BleManager.retrieveServices(peripheralId);
       //Falta desligar os leds quando entra na tela de preset para configurá-los
       
-      
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
       BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
   
