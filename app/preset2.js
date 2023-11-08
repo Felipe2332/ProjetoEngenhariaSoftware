@@ -249,6 +249,7 @@ const toggleGreenLed3 = () => {
           <Animatable.View animation="fadeInLeftBig" delay={500} >
           <TouchableOpacity onPress={() => handleSave('preset2')} style={styles.botaoSalvarPreset}><Text style={{color:"white", fontSize:35}}>Salvar</Text></TouchableOpacity>
           </Animatable.View>
+          
       </ImageBackground>
         
     )

@@ -207,14 +207,12 @@ export default function TelaPreset () {
         return bytes.map(byte => String.fromCharCode(byte)).join('');
     }
     }
-
     //Vai rodar quando entrar na tela
     useEffect(() => {
       connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
       .catch(error => {
           console.error("An error occurred: ", error);
       });
-      
   }, []);
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
