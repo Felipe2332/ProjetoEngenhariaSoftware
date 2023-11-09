@@ -42,6 +42,40 @@ export default function TelaPreset () {
 
     const [isLoading, setIsLoading] = useState(false);
     const [isSending, setIsSending] = useState(false);
+
+    const desligarTodosLeds = () => {
+      let data = '10'; 
+      sendMessage(data,setIsLed1On);
+      setIsLed1On(false);
+    
+      data = '20'; 
+      sendMessage(data,setIsLed2On);
+      setIsLed2On(false);
+
+      data = '30';
+      sendMessage (data,setIsLed3On);
+      setIsLed3On(false);
+
+      data = '40';
+      sendMessage(data,setIsLed4On);
+      setIsLed4On(false);
+
+      data = '50';
+      sendMessage(data,setIsLed5On);
+      setIsLed5On(false);
+
+      data = '60';
+      sendMessage(data,setIsLed6On);
+      setIsLed6On(false);
+
+      data = '70';
+      sendMessage(data,setIsLed7On);
+      setIsLed7On(false);
+
+      data = '80';
+      sendMessage(data,setIsLed8On);
+      setIsLed8On(false);
+    };
     
 
     async function connectAndPrepare(peripheralId, serviceUUID, characteristicUUID) {
@@ -66,6 +100,7 @@ export default function TelaPreset () {
           console.log(`Received ${data} for characteristic ${characteristic}`);
           switch (data) {
             case '1':
+              desligarTodosLeds();
               setPreset1Selected(true);
               setPreset2Selected(false);
               setPreset3Selected(false);
@@ -75,6 +110,7 @@ export default function TelaPreset () {
               }
               break;
             case '3':
+              desligarTodosLeds();
               setPreset1Selected(false);
               setPreset2Selected(true);
               setPreset3Selected(false);
@@ -84,6 +120,7 @@ export default function TelaPreset () {
               }
               break;
             case '2':
+              desligarTodosLeds();
               setPreset1Selected(false);
               setPreset2Selected(false);
               setPreset3Selected(true);
@@ -142,39 +179,7 @@ export default function TelaPreset () {
         setIsLed8On(!isLed8On);
       };
 
-      const desligarTodosLeds = () => {
-        let data = '10'; 
-        sendMessage(data,setIsLed1On);
-        setIsLed1On(false);
       
-        data = '20'; 
-        sendMessage(data,setIsLed2On);
-        setIsLed2On(false);
-
-        data = '30';
-        sendMessage (data,setIsLed3On);
-        setIsLed3On(false);
-
-        data = '40';
-        sendMessage(data,setIsLed4On);
-        setIsLed4On(false);
-
-        data = '50';
-        sendMessage(data,setIsLed5On);
-        setIsLed5On(false);
-
-        data = '60';
-        sendMessage(data,setIsLed6On);
-        setIsLed6On(false);
-
-        data = '70';
-        sendMessage(data,setIsLed7On);
-        setIsLed7On(false);
-
-        data = '80';
-        sendMessage(data,setIsLed8On);
-        setIsLed8On(false);
-      };
 
       const carregarPreset = async (presetName) => {
         try {
@@ -183,8 +188,6 @@ export default function TelaPreset () {
             leds = JSON.parse(leds);
             console.log(`Estado carregado para ${presetName}: ${leds}`);
 
-            desligarTodosLeds();
-      
             if (leds[0]) toggleRedLed();
             if (leds[1]) toggleYellowLed();
             if (leds[2]) toggleGreenLed();
@@ -210,10 +213,13 @@ export default function TelaPreset () {
     //Vai rodar quando entrar na tela
     useEffect(() => {
       connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
-      .catch(error => {
-          console.error("An error occurred: ", error);
-      });
-  }, []);
+    .then(() => {
+      desligarTodosLeds(); 
+    })
+    .catch(error => {
+      console.error("An error occurred: ", error);
+    });
+}, []);
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
   

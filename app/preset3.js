@@ -65,6 +65,16 @@ export default function PresetUm () {
       sendCommands(commands);
     };
 
+    const desligarLeds = () => {
+      const sendCommands = (commands) => {
+        for (let command of commands) {
+          sendMessage(command);
+        }
+      };
+      let commands = ['10', '20', '30','40','50','60','70','80'];
+      sendCommands(commands);
+    };
+
     const carregarPreset = async (presetName) => {
       try {
         let leds = await AsyncStorage.getItem(presetName);
@@ -95,6 +105,7 @@ export default function PresetUm () {
     };
 
   useEffect(() => {
+    desligarLeds();
     carregarPreset('preset3');
   }, []);
   
