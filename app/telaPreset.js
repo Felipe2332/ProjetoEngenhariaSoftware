@@ -56,7 +56,7 @@ export default function TelaPreset () {
       //Falta desligar os leds quando entra na tela de preset para configurá-los
       
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
+      //BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
   
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
@@ -176,30 +176,30 @@ export default function TelaPreset () {
         setIsLed8On(false);
       };
 
-      const carregarPreset = async (presetName) => {
-        try {
-          let leds = await AsyncStorage.getItem(presetName);
-          if (leds !== null) {
-            leds = JSON.parse(leds);
-            console.log(`Estado carregado para ${presetName}: ${leds}`);
-
-            desligarTodosLeds();
+      async function carregarPreset(presetName, setLeds) {
+        const promise = new Promise((resolve, reject) => {
+          setIsLoading(true);
+          setPresetSelected(presetName);
+          bleManagerEmitter.addListener(
+            "BleManagerDidUpdateValueForCharacteristic",
+            ({ value, peripheral, characteristic, service }) => {
+              if (value.length === preset.length) {
+                resolve();
+              }
+            }
+          );
+        });
       
-            if (leds[0]) toggleRedLed();
-            if (leds[1]) toggleYellowLed();
-            if (leds[2]) toggleGreenLed();
-            if (leds[3]) toggleRedLed2();
-            if (leds[4]) toggleGreenLed2();
-            if (leds[5]) toggleRedLed3();
-            if (leds[6]) toggleRedLed4();
-            if (leds[7]) toggleGreenLed3();
-          }
-        } catch (error) {
-          console.log(error);
-        }finally {
-          setIsLoading(false);
-        }
-      };
+        return promise
+          .then(() => {
+            setIsLoading(false);
+            setLeds(preset[presetName]);
+          })
+          .catch((err) => {
+            console.log(err);
+            setIsLoading(false);
+          });
+      }
       
       
       // Actions triggereng BleManagerDidUpdateValueForCharacteristic event
