@@ -67,8 +67,20 @@ export default function PresetUm () {
       let commands = ['10', '20', '30','40','50','60','70','80'];
       sendCommands(commands);
     };
+    const desligarLeds = () => {
+      // Desliga todos os LEDs
+      setIsLed1On(false);
+      setIsLed2On(false);
+      setIsLed3On(false);
+      setIsLed4On(false);
+      setIsLed5On(false);
+      setIsLed6On(false);
+      setIsLed7On(false);
+      setIsLed8On(false);
+    };
 
     const carregarPreset = async (presetName) => {
+      desligarLeds();
       try {
         let leds = await AsyncStorage.getItem(presetName);
         if (leds !== null) {
