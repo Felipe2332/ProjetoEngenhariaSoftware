@@ -122,7 +122,7 @@ export default function PresetUm () {
       let bytes = stringToBytes(data); // Converte o comando em uma matriz de bytes
 
       BleManager.start({ showAlert: false }).then(() => {
-        // Success code
+        
         console.log("Modulo ta bao");
       });
       

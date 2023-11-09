@@ -20,16 +20,14 @@ export const sendMessage = (data,setLedState) => {
     });
     
     BleManager.connect("B0:A7:32:15:39:42")
-    
-    
-.then(() => {
-  // Success code
-  console.log("Connected");
-})
-.catch((error) => {
-  // Failure code
-  console.log(error);
-});
+    .then(() => {
+      // Success code
+      console.log("Connected");
+    })
+    .catch((error) => {
+      // Failure code
+      console.log(error);
+    });
     BleManager.write(peripheralId, serviceUUID, characteristicUUID, bytes)
     .then(() => {
       // Sucesso ao escrever o comando

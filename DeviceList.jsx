@@ -24,7 +24,7 @@ import {styles} from './styles/styles'
                 styles.scanButtonText,
                 {fontWeight: 'bold', fontSize: 16},
               ]}>
-              {connected ? 'Disconnect' : 'Connect'}
+              {connected ? 'Desconectar' : 'Conectar'}
             </Text>
           </TouchableOpacity>
         </View>

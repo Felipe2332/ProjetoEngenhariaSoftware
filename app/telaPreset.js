@@ -90,8 +90,13 @@ export default function TelaPreset () {
       //Falta desligar os leds quando entra na tela de preset para configurá-los
       
       // Por algum motivo, a troca de tela só funciona quando eu coloco start notification e tiro logo em seguida
-      BleManager.startNotification(peripheralId,serviceUUID,characteristicUUID)
-  
+      const promise = BleManager.startNotification(peripheralId, serviceUUID, characteristicUUID);
+      try {
+        await promise;
+      } catch (error) {
+        // Isso é para ignorar o não reconhecimento do UUID
+      }
+
       bleManagerEmitter.addListener(
         "BleManagerDidUpdateValueForCharacteristic",
         ({ value, peripheral, characteristic, service }) => {
@@ -134,6 +139,15 @@ export default function TelaPreset () {
           }
         });
 
+      // Actions triggereng BleManagerDidUpdateValueForCharacteristic event
+      function bytesToString(bytes) {
+        return bytes.map(byte => String.fromCharCode(byte)).join('');
+    }
+
+    }
+
+    
+    const carregarPreset = async (presetName) => {
       const toggleRedLed = () => {
         let data = isLed1On ? '10' : '11';
         sendMessage(data,setIsLed1On);
@@ -178,48 +192,45 @@ export default function TelaPreset () {
         sendMessage(data,setIsLed8On);
         setIsLed8On(!isLed8On);
       };
+      try {
+        let leds = await AsyncStorage.getItem(presetName);
+        if (leds !== null) {
+          leds = JSON.parse(leds);
+          console.log(`Estado carregado para ${presetName}: ${leds}`);
 
-      
-
-      const carregarPreset = async (presetName) => {
-        try {
-          let leds = await AsyncStorage.getItem(presetName);
-          if (leds !== null) {
-            leds = JSON.parse(leds);
-            console.log(`Estado carregado para ${presetName}: ${leds}`);
-
-            if (leds[0]) toggleRedLed();
-            if (leds[1]) toggleYellowLed();
-            if (leds[2]) toggleGreenLed();
-            if (leds[3]) toggleRedLed2();
-            if (leds[4]) toggleGreenLed2();
-            if (leds[5]) toggleRedLed3();
-            if (leds[6]) toggleRedLed4();
-            if (leds[7]) toggleGreenLed3();
-          }
-        } catch (error) {
-          console.log(error);
-        }finally {
-          setIsLoading(false);
+          if (leds[0]) toggleRedLed();
+          if (leds[1]) toggleYellowLed();
+          if (leds[2]) toggleGreenLed();
+          if (leds[3]) toggleRedLed2();
+          if (leds[4]) toggleGreenLed2();
+          if (leds[5]) toggleRedLed3();
+          if (leds[6]) toggleRedLed4();
+          if (leds[7]) toggleGreenLed3();
         }
-      };
-      
-      
-      // Actions triggereng BleManagerDidUpdateValueForCharacteristic event
-      function bytesToString(bytes) {
-        return bytes.map(byte => String.fromCharCode(byte)).join('');
-    }
-    }
-    //Vai rodar quando entrar na tela
+      } catch (error) {
+        console.log(error);
+      }finally {
+        setIsLoading(false);
+      }
+    };
+    
     useEffect(() => {
       connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
-    .then(() => {
-      desligarTodosLeds(); 
-    })
-    .catch(error => {
-      console.error("An error occurred: ", error);
-    });
-}, []);
+        .then(() => {
+          desligarTodosLeds();
+          // Call the carregarPreset() function here to load the preset data
+          if (preset1Selected) {
+            carregarPreset('preset1', setPreset1Leds);
+          } else if (preset2Selected) {
+            carregarPreset('preset2', setPreset2Leds);
+          } else if (preset3Selected) {
+            carregarPreset('preset3', setPreset3Leds);
+          }
+        })
+        .catch(error => {
+          console.error("An error occurred: ", error);
+        });
+    }, []);
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
   
