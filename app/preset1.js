@@ -112,7 +112,6 @@ export default function PresetUm () {
     carregarPreset('preset1');
     
   }, []);
-  
     const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
       let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
