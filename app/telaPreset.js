@@ -214,23 +214,16 @@ export default function TelaPreset () {
       }
     };
     
+    //Vai rodar quando entrar na tela
     useEffect(() => {
       connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
-        .then(() => {
-          desligarTodosLeds();
-          // Call the carregarPreset() function here to load the preset data
-          if (preset1Selected) {
-            carregarPreset('preset1', setPreset1Leds);
-          } else if (preset2Selected) {
-            carregarPreset('preset2', setPreset2Leds);
-          } else if (preset3Selected) {
-            carregarPreset('preset3', setPreset3Leds);
-          }
-        })
-        .catch(error => {
-          console.error("An error occurred: ", error);
-        });
-    }, []);
+    .then(() => {
+      desligarTodosLeds(); 
+    })
+    .catch(error => {
+      console.error("An error occurred: ", error);
+    });
+}, []);
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
   
