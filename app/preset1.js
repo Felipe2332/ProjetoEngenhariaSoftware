@@ -110,7 +110,6 @@ export default function PresetUm () {
   useEffect(() => {
     desligarLeds();
     carregarPreset('preset1');
-    
   }, []);
     const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
