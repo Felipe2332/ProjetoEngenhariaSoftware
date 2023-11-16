@@ -193,7 +193,6 @@ const toggleGreenLed3 = () => {
   setIsLed8On(!isLed8On);
 };
 
-
     return(
       <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imagePresetUm}>
         <LottieView style={styles.animation}
