@@ -234,7 +234,7 @@ export default function TelaPreset () {
     return(
         <View style={styles.containerTelaPreset}>
 
-          <StatusBar style="auto"/>
+        <StatusBar backgroundColor="black"/>  
 
             <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.image}>
             

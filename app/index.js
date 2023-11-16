@@ -163,12 +163,11 @@ const App = () => {
     
     
     <SafeAreaView style={styles.container}>
-    <StatusBar />
+    <StatusBar backgroundColor="black"/>
     <ImageBackground source={require('../assets/peakpx.jpg')} style={styles.imageIndex}>
     
       <Animated.View>
       
-      <TouchableOpacity style={{backgroundColor:"#00bfff",marginLeft:200,marginTop:20,alignItems:"center",borderRadius:15, right: 0 }}onPress={handlePress}><Icon style={{fontSize:30}} name="arrow-right"></Icon></TouchableOpacity>
       
         <Text
           style={
