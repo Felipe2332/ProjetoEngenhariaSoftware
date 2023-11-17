@@ -109,30 +109,21 @@ export default function TelaPreset () {
               setPreset1Selected(true);
               setPreset2Selected(false);
               setPreset3Selected(false);
-              if (!isLoading) {
-                setIsLoading(true);
-                carregarPreset('preset1', setPreset1Leds);
-              }
+              carregarPreset('preset1', setPreset1Leds);
               break;
             case '3':
               desligarTodosLeds();
               setPreset1Selected(false);
               setPreset2Selected(true);
               setPreset3Selected(false);
-              if (!isLoading) {
-                setIsLoading(true);
-                carregarPreset('preset2', setPreset2Leds);
-              }
+              carregarPreset('preset2', setPreset2Leds);
               break;
             case '2':
               desligarTodosLeds();
               setPreset1Selected(false);
               setPreset2Selected(false);
               setPreset3Selected(true);
-              if (!isLoading) {
-                setIsLoading(true);
-                carregarPreset('preset3', setPreset3Leds);
-              }
+              carregarPreset('preset3', setPreset3Leds);
               break;
             default:
               console.log(`Received unknown data: ${data}`);
@@ -227,9 +218,7 @@ export default function TelaPreset () {
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
   
-    const handlePress = (route) => {
-      animationRef.fadeOut().then(endState => navigation.navigate(route));
-    };}  
+}  
 
     return(
         <View style={styles.containerTelaPreset}>

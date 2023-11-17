@@ -4,12 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/styles'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import LottieView from 'lottie-react-native';
 import * as Animatable from 'react-native-animatable';
-
-
-
 import BleManager from 'react-native-ble-manager';
 import { NativeEventEmitter, NativeModules } from 'react-native';
 import { stringToBytes } from "convert-string";
@@ -64,18 +60,44 @@ export default function PresetUm () {
           sendMessage(command);
         }
       };
-      let commands = ['10', '20', '30','40','50','60','70','80'];
+      let commands = ['100'];
       sendCommands(commands);
     };
+
     const desligarLeds = () => {
-      const sendCommands = (commands) => {
-        for (let command of commands) {
-          sendMessage(command);
-        }
-      };
-      let commands = ['10', '20', '30','40','50','60','70','80'];
-      sendCommands(commands);
+      let data = '10'; 
+      sendMessage(data,setIsLed1On);
+      setIsLed1On(false);
+    
+      data = '20'; 
+      sendMessage(data,setIsLed2On);
+      setIsLed2On(false);
+
+      data = '30';
+      sendMessage (data,setIsLed3On);
+      setIsLed3On(false);
+
+      data = '40';
+      sendMessage(data,setIsLed4On);
+      setIsLed4On(false);
+
+      data = '50';
+      sendMessage(data,setIsLed5On);
+      setIsLed5On(false);
+
+      data = '60';
+      sendMessage(data,setIsLed6On);
+      setIsLed6On(false);
+
+      data = '70';
+      sendMessage(data,setIsLed7On);
+      setIsLed7On(false);
+
+      data = '80';
+      sendMessage(data,setIsLed8On);
+      setIsLed8On(false);
     };
+    
 
     const carregarPreset = async (presetName) => {
       
@@ -111,6 +133,7 @@ export default function PresetUm () {
     desligarLeds();
     carregarPreset('preset1');
   }, []);
+
     const sendMessage = (data) => {
       let peripheralId = "B0:A7:32:15:39:42"; // ID do seu dispositivo periférico
       let serviceUUID = "abcd1234-ab12-cd34-a123-456789abcdef"; // UUID do serviço
@@ -124,7 +147,6 @@ export default function PresetUm () {
       });
       
       BleManager.connect("B0:A7:32:15:39:42")
-      
       
   .then(() => {
     // Success code
