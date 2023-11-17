@@ -65,42 +65,16 @@ export default function PresetUm () {
     };
 
     const desligarLeds = () => {
-      let data = '10'; 
-      sendMessage(data,setIsLed1On);
-      setIsLed1On(false);
-    
-      data = '20'; 
-      sendMessage(data,setIsLed2On);
-      setIsLed2On(false);
-
-      data = '30';
-      sendMessage (data,setIsLed3On);
-      setIsLed3On(false);
-
-      data = '40';
-      sendMessage(data,setIsLed4On);
-      setIsLed4On(false);
-
-      data = '50';
-      sendMessage(data,setIsLed5On);
-      setIsLed5On(false);
-
-      data = '60';
-      sendMessage(data,setIsLed6On);
-      setIsLed6On(false);
-
-      data = '70';
-      sendMessage(data,setIsLed7On);
-      setIsLed7On(false);
-
-      data = '80';
-      sendMessage(data,setIsLed8On);
-      setIsLed8On(false);
+      const sendCommands = (commands) => {
+        for (let command of commands) {
+          sendMessage(command);
+        }
+      };
+      let commands = ['10', '20', '30','40','50','60','70','80'];
+      sendCommands(commands);
     };
-    
 
     const carregarPreset = async (presetName) => {
-      
       try {
         let leds = await AsyncStorage.getItem(presetName);
         if (leds !== null) {

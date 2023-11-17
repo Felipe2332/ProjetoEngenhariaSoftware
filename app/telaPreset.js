@@ -42,6 +42,7 @@ export default function TelaPreset () {
 
     const [isLoading, setIsLoading] = useState(false);
     const [isSending, setIsSending] = useState(false);
+    const [isConnected, setIsConnected] = useState(false);
 
     const desligarTodosLeds = () => {
       let data = '10'; 
@@ -207,14 +208,16 @@ export default function TelaPreset () {
     
     //Vai rodar quando entrar na tela
     useEffect(() => {
-      connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
-    .then(() => {
-      desligarTodosLeds(); 
-    })
-    .catch(error => {
-      console.error("An error occurred: ", error);
-    });
-}, []);
+      if (!isConnected) {
+        connectAndPrepare(peripheralId, serviceUUID, characteristicUUID)
+        .then(() => {
+          setIsConnected(true);
+        })
+        .catch(error => {
+          console.error("An error occurred: ", error);
+        });
+      }
+    }, [peripheralId, serviceUUID, characteristicUUID]);
   const AnimatedButton = ({ navigation }) => {
     let animationRef = useRef(null);
   
